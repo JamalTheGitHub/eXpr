@@ -63,3 +63,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Clearance gem
 gem 'clearance'
+
+# Figaro gem
+gem 'figaro'
