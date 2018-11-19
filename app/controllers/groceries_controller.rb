@@ -20,6 +20,14 @@ class GroceriesController < ApplicationController
 
   def edit
   end
+
+  def update
+    if @grocery.update(grocery_params)
+      redirect to groceries_path
+    else
+      render 'edit'
+    end
+  end
   
   def show
   end
