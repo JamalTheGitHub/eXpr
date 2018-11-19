@@ -3,4 +3,5 @@
 <%= grocery.category %>
 <%= grocery.expired_date %>
 <%= link_to "Edit", edit_grocery_path(grocery) %>
+<%= link_to "Delete", grocery_path(grocery), method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
