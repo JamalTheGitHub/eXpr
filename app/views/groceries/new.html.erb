@@ -1,0 +1,19 @@
+<%= form_with scope: :grocery, url:groceries_path, local: true do |form| %>
+  <p>
+    <%= form.label :ingredient %><br/>
+    <%= form.text_field :ingredient %><br/>
+  </p>
+  <p>
+    <%= form.label :category %><br/>
+    <%= form.text_field :category %><br/>
+  </p>
+  <p>
+    <%= form.label :expired_date %><br/>
+    <%= form.date_field :expired_date %><br/>
+  </p>
+  <p>
+    <%= form.submit "Submit" %>
+  </p>
+<% end %>
+
+<%= link_to "Show", groceries_path  %>
