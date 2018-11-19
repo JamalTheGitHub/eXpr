@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       only: [:create, :edit, :update]
   end
   get 'groceries/show'
+  post 'groceries/new'
   resources :groceries
 
   get "/sign_in" => "clearance/sessions#new", as: "sign_in"
