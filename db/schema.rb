@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 
+
+
+
 ActiveRecord::Schema.define(version: 2018_11_19_053558) do
 
 
@@ -29,12 +32,15 @@ ActiveRecord::Schema.define(version: 2018_11_19_053558) do
     t.index ["email"], name: "index_users_on_email"
     t.index ["remember_token"], name: "index_users_on_remember_token"
     
+  end
+    
   create_table "groceries", force: :cascade do |t|
     t.string "ingredient"
     t.string "category"
     t.date "expired_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+
   end
 
 end
