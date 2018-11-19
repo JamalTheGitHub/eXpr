@@ -10,7 +10,9 @@ class GroceriesController < ApplicationController
   end
 
   def create
+    # byebug
     @grocery = Grocery.new(grocery_params)
+    @grocery.user_id = current_user.id
     if @grocery.save
       redirect_to groceries_path
     else
