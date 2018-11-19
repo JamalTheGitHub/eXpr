@@ -3,5 +3,4 @@ Rails.application.routes.draw do
   get 'groceries/show'
 
   resources :groceries
-  
 end
