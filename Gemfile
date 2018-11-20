@@ -66,3 +66,4 @@ gem 'clearance'
 
 # Figaro gem
 gem 'figaro'
+gem 'spoonacular_api', '~> 1.0.0'
