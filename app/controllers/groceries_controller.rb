@@ -1,4 +1,5 @@
 class GroceriesController < ApplicationController
+  require 'spoonacular_api'
 
   def index
     @groceries = Grocery.all
