@@ -9,11 +9,15 @@
   </p>
   <p>
     <%= form.label :expired_date %><br/>
-    <%= form.date_field :expired_date %><br/>
+    <%= form.date_field :expired_date, id:'exp-date'%><br/>
   </p>
   <p>
     <%= form.submit "Submit" %>
   </p>
 <% end %>
+
+
+<%= render 'ocr'%>
+
 
 <%= link_to "Show", groceries_path  %>

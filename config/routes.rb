@@ -18,4 +18,6 @@ Rails.application.routes.draw do
 
   root "welcome#index"
 
+  post '/ocr', to: 'groceries#ocr_analyse'
+
 end

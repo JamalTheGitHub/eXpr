@@ -71,3 +71,6 @@ gem 'mini_magick'
 # Figaro gem
 gem 'figaro'
 gem 'unirest'
+
+# OCR_Space gem 
+gem 'ocr_space'
