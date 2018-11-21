@@ -67,3 +67,6 @@ gem 'clearance'
 # Figaro gem
 gem 'figaro'
 gem 'unirest'
+
+# OCR_Space gem 
+gem 'ocr_space'

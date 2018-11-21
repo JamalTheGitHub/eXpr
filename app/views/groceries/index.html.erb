@@ -2,9 +2,10 @@
   <%= button_to "Create Grocery", new_grocery_path %>
 <h2> List of Groceries </h2>
 <% @groceries.each do |grocery| %>
-<%= grocery.ingredient %>
+<p><%= grocery.ingredient %>
 <%= grocery.category %>
 <%= grocery.expired_date %>
 <%= link_to "Edit", edit_grocery_path(grocery) %>
 <%= link_to "Delete", grocery_path(grocery), method: :delete, data: { confirm: 'Are you sure?' } %>
+</p>
 <% end %>
