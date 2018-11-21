@@ -1,7 +1,10 @@
 class GroceriesController < ApplicationController
   require 'spoonacular_api'
-
+  
   def index
+    x_mashape_key = "9JlX7WalE8mshRQFIqjlXqg4YoCzp1J1zQdjsnWGJGrUvGPS3h"
+    client = SpoonacularApi::SpoonacularAPIClient.new(x_mashape_key)
+    
     @groceries = Grocery.all
     # @grocery = Grocery.find(params[:id])
   end
