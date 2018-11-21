@@ -70,4 +70,4 @@ gem 'mini_magick'
 
 # Figaro gem
 gem 'figaro'
-
+gem 'unirest'
