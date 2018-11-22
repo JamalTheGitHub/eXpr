@@ -74,3 +74,7 @@ gem 'unirest'
 
 # OCR_Space gem 
 gem 'ocr_space'
+
+# AWS gem
+gem 'carrierwave-aws'
+gem 'aws-sdk-rails'
