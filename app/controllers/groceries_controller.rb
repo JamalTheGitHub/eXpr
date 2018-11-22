@@ -20,6 +20,14 @@ class GroceriesController < ApplicationController
       format.js {render :json => @result}
     end
   end
+  
+  def voice_analyse
+    voice_to_text = voice_params[:value]
+    @result_hash = item_date_algo(voice_to_text)
+    respond_to do |format|
+      format.js {render :json => @result_hash}
+    end
+  end
 
   def create
     @grocery = Grocery.new(grocery_params)
@@ -123,5 +131,47 @@ class GroceriesController < ApplicationController
     end
   end
 
+  # VOICE RECOGNITION 
+  # SET PARAMS TO RECEIVE AJAX REQUEST OF VOICE DATA
+  def voice_params
+    params.require(:text).permit(:value)
+  end
 
+  # ALGORITHM TO INTELLIGENTLY UNDERSTAND TEXT
+  def item_date_algo(parsed_text)
+    # 'energy bar 12th November 2020'
+    # 'pineapple 6th of July 2018'
+    # 'raw fish 5th July 2018'
+    # 'junk food 11th of May 2019'
+    # 'junk food 11 May 2019'
+    # 'watermelon 23rd of January 2023'
+    # ' raw pork tomorrow'
+    # 'Orange next week'
+    # ' egg 3 days'
+
+
+    # DDth(month)YYYY || DD(month)YYYY || Dth(month)YYYY
+    months = Date::MONTHNAMES.compact
+    combo1 = /\d{1,2}(st|nd|rd|th)?(\s?(Of)?)\s(#{months.join('|')})\s\d{4}/
+
+    # Capitalises all first character of words only
+    text = parsed_text.titleize
+
+    if text.match?(combo1)
+      result = text.match(combo1)[0]
+      item_name = text.chomp(result).strip
+      expiry_date = Date.parse(result).to_s
+    end
+
+    if item_name && expiry_date
+      return {item: item_name, date: expiry_date, error: 0}
+    elsif item_name
+      return {item: item_name, error: 0, message:'No expiry date found'}
+    elsif expiry_date
+      return {date: expiry_date, error: 0, message:'No grocery name found'}
+    else
+      return {error: 1, message:'No grocery name or expiry date found'}
+    end
+  end
+  
 end
