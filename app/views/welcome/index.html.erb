@@ -22,4 +22,4 @@ img {
 </style>
 
 <p> What are you waiting for?! Create listings for grocery now! <p>
-<%= button_to "Add Grocery!", new_grocery_path %>
+<%= button_to "Add Grocery!", new_user_grocery_path(current_user), method: :get %>

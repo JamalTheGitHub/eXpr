@@ -1,4 +1,4 @@
-<%= form_with(model: @grocery, local: true) do |form| %>
+<%= form_with(model: @grocery, local: true, url: user_grocery_path(@grocery.user, @grocery)) do |form| %>
   <p>
     <%= form.label :ingredient %><br/>
     <%= form.text_field :ingredient %><br/>
