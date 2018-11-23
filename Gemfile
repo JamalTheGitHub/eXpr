@@ -71,6 +71,8 @@ gem 'mini_magick'
 # Figaro gem
 gem 'figaro'
 gem 'unirest'
+# Recipe gem
+gem 'food2fork'
 
 # OCR_Space gem 
 gem 'ocr_space'
