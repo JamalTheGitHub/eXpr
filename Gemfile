@@ -67,3 +67,4 @@ gem 'clearance'
 # Figaro gem
 gem 'figaro'
 gem 'unirest'
+gem 'food2fork'

@@ -85,6 +85,7 @@ GEM
     ffi (1.9.25)
     figaro (1.1.1)
       thor (~> 0.14)
+    food2fork (0.1.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     i18n (1.1.1)
@@ -216,6 +217,7 @@ DEPENDENCIES
   clearance
   coffee-rails (~> 4.2)
   figaro
+  food2fork
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)
