@@ -2,7 +2,8 @@ class GroceriesController < ApplicationController
   require 'ocr_space'
 
   def index
-    
+    recipe_key = ENV["FOOD2FORK"]
+
     @groceries = Grocery.all
     # @grocery = Grocery.find(params[:id])
   end
@@ -10,7 +11,17 @@ class GroceriesController < ApplicationController
   def new
     @grocery = Grocery.new
   end
-
+  
+  def create
+    @grocery = Grocery.new(grocery_params)
+    @grocery.user_id = current_user.id
+    if @grocery.save
+      redirect_to user_groceries_path
+    else
+      render 'new'
+    end
+  end
+  
   def ocr_analyse
     file = img_params[:base64]
     data = OcrSpace::FilePost.post('/parse/image', body: { apikey: ENV['OCR_KEY'], language: 'eng', isOverlayRequired: true, base64Image: file })
@@ -29,24 +40,15 @@ class GroceriesController < ApplicationController
     end
   end
 
-  def create
-    @grocery = Grocery.new(grocery_params)
-    @grocery.user_id = current_user.id
-    if @grocery.save
-      redirect_to groceries_path
-    else
-      render 'new'
-    end
-  end
-
   def edit
+    byebug
     @grocery = Grocery.find(params[:id])
   end
 
   def update
     @grocery = Grocery.find(params[:id])
     if @grocery.update(grocery_params)
-      redirect_to groceries_path
+      redirect_to user_groceries_path
     else
       render 'edit'
     end
@@ -56,10 +58,14 @@ class GroceriesController < ApplicationController
     @grocery = Grocery.find(params[:id])
     @grocery.destroy
 
-    redirect_to groceries_path
+    redirect_to user_groceries_path
   end
   
   def show
+    recipe_key = ENV["FOOD2FORK"]
+
+    @groceries = Grocery.all
+    @grocery = Grocery.find(params[:id])
   end
 
   private
