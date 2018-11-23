@@ -1,12 +1,15 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div>
-<button id="voice-record-button" >Record Voice</button>
- <div id='voice-output'></div>
+<font class="fa fa-microphone" id="voice-record-button" style="font-size:40px"></font>
+ <div id='voice-output'>
+ </div>
 </div>
 
 <script>
 // VOICE RECORDING SEGMENT
 // recording voice button added in the HTML side
-
+const ingredient_form = $('#ingredient')
+const expiry_date_form = $('#exp-date')
 const record_btn = document.querySelector('#voice-record-button')
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
@@ -21,10 +24,12 @@ const voice_output = document.querySelector('#voice-output')
 
 record_btn.onclick = function() {
  recognition.start();
- console.log('Ready to receive a color command.');
+ $(this).attr("color", "red");
+ console.log('Ready to receive a command.');
 }
 
 recognition.onresult = function(event) {
+ $("#voice-record-button").attr("color", "black");
  var last = event.results.length - 1;
  var first_result = event.results[last][0].transcript;
  var confidence = event.results[0][0].confidence
@@ -45,13 +50,16 @@ recognition.onresult = function(event) {
  response.json().then(function(data){
    console.log(data),
    voice_output.textContent = "Voice: " + data.item + " (Expiry Date: " + data.date + ")"
+   expiry_date_form.attr('value',data.date)
+   ingredient_form.attr('value',data.item)
    })
-
  })
 }
 
 recognition.onspeechend = function() {
  recognition.stop();
 }
+
+
 // VOICE RECORDING FEATURE ENDS
 </script>
