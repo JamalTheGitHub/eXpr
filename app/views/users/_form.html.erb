@@ -1,14 +1,13 @@
-<div class="text-field">
-  <%= form.label :email %>
-  <%= form.text_field :email, type: 'email' %>
-</div>
-
-<div class="password-field">
-  <%= form.label :password %>
-  <%= form.password_field :password %>
-</div>
+ <div class="form-group">
+    <label for="email">Email address:</label>
+    <%= form.text_field :email, class: "form-control", id: "email" %>
+  </div>
+  <div class="form-group">
+    <label for="pwd">Password:</label>
+    <%= form.password_field :password, class: "form-control", id: "pwd" %>
+  </div>
 
 <div class="avatar-field">
-  <%= form.label :avatar %>
+  <%= form.label "Profile picture:" %>
   <%= form.file_field :avatar %>
 </div>

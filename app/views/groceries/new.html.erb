@@ -1,7 +1,7 @@
 <%= form_with scope: :grocery, url: user_groceries_path, local: true do |form| %>
   <p>
     <%= form.label :ingredient %><br/>
-    <%= form.text_field :ingredient %><br/>
+    <%= form.text_field :ingredient, id:'ingredient' %><br/>
   </p>
   <p>
     <%= form.label :category %><br/>
