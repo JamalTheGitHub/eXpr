@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+   
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "clearance/sessions", only: [:create]
 
@@ -6,10 +7,12 @@ Rails.application.routes.draw do
     resource :password,
       controller: "clearance/passwords",  
       only: [:create, :edit, :update]
+    end
+  resources :users do    
+    resources :groceries
+
   end
-  get 'groceries/show'
-  post 'groceries/new'
-  resources :groceries
+  # resources :groceries
 
   get "/sign_in" => "clearance/sessions#new", as: "sign_in"
   delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
