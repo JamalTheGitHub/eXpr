@@ -64,7 +64,19 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Clearance gem
 gem 'clearance'
 
+# Image upload using CarrierWave & MiniMagick 
+gem 'carrierwave'
+gem 'mini_magick'
+
 # Figaro gem
 gem 'figaro'
 gem 'unirest'
+# Recipe gem
 gem 'food2fork'
+
+# OCR_Space gem 
+gem 'ocr_space'
+
+# AWS gem
+gem 'carrierwave-aws'
+gem 'aws-sdk-rails'

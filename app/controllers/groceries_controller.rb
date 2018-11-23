@@ -1,5 +1,6 @@
 class GroceriesController < ApplicationController
-  
+  require 'ocr_space'
+
   def index
     
     @groceries = Grocery.all
@@ -10,8 +11,25 @@ class GroceriesController < ApplicationController
     @grocery = Grocery.new
   end
 
+  def ocr_analyse
+    file = img_params[:base64]
+    data = OcrSpace::FilePost.post('/parse/image', body: { apikey: ENV['OCR_KEY'], language: 'eng', isOverlayRequired: true, base64Image: file })
+    parsed_text = data.parsed_response['ParsedResults'][0]["ParsedText"].gsub(/\r|\n/, "")
+    @result = date_algo(parsed_text)
+    respond_to do |format|
+      format.js {render :json => @result}
+    end
+  end
+  
+  def voice_analyse
+    voice_to_text = voice_params[:value]
+    @result_hash = item_date_algo(voice_to_text)
+    respond_to do |format|
+      format.js {render :json => @result_hash}
+    end
+  end
+
   def create
-    # byebug
     @grocery = Grocery.new(grocery_params)
     @grocery.user_id = current_user.id
     if @grocery.save
@@ -50,5 +68,110 @@ class GroceriesController < ApplicationController
     params.require(:grocery).permit(:ingredient, :category, :expired_date)
   end
 
+  # SET THE PARAMS TO RECEIVE AJAX REQUEST OF IMAGE DATA IN BASE64
+  def img_params
+    params.require(:image).permit(:base64)
+  end
 
+  # ALGORITHM TO INTELLIGENTLY FIND DATE
+  def date_algo(parsed_text)
+    # 1. CHECK IF THERE IS ANY RESULTS IF NOT THEN SKIP ALGORITHM
+    expiry_date = ''
+    if parsed_text.length > 5 
+      text = parsed_text.gsub(/\s+/, '')
+      combo1 = /(\d{4})\.\d{2}\.\d{2}/
+      combo2 = /\d{2}\.\d{2}\.(\d{4})/
+      combo3 = /\d{4}\.\d\.\d{2}/
+      combo4 = /\d{2}\.\d\.\d{4}/
+      combo5 = /\d{2}\w{3}\d{4}/
+      combo6 = /\d{8}/
+      combo7 = /\d{6}/
+
+      if text.match?(combo1)
+        result = combo1.match(text)
+        if result[1].to_i < Date.today.year
+          expiry_date = Date.parse(result[0][2..-1]).to_s
+        else
+          expiry_date = Date.parse(result.to_s).to_s
+        end
+      elsif text.match?(combo2)
+        result = combo2.match(text)
+        if result[1].to_i < Date.today.year
+          expiry_date = Date.parse(result[0][0..7]).to_s
+        else
+          expiry_date = Date.parse(result.to_s).to_s
+        end
+
+      elsif text.match?(combo3)
+        result = combo3.match(text)
+        expiry_date = Date.parse(result.to_s).to_s
+
+      elsif text.match?(combo4)
+        result = combo4.match(text)
+        expiry_date = Date.parse(result.to_s).to_s
+
+      elsif text.match?(combo5)
+        result = combo5.match(text)
+        expiry_date = Date.parse(result.to_s).to_s
+
+      elsif text.match?(combo6)
+        result = combo6.match(text)
+        expiry_date = Date.parse(result.to_s).to_s
+
+      elsif text.match?(combo7)
+        result = combo7.match(text)
+        expiry_date = Date.parse(result.to_s).to_s
+      end
+     end
+
+    if expiry_date == ''
+      return expiry_date = {error: 1}
+    else 
+      return {date: expiry_date, error: 0}
+    end
+  end
+
+  # VOICE RECOGNITION 
+  # SET PARAMS TO RECEIVE AJAX REQUEST OF VOICE DATA
+  def voice_params
+    params.require(:text).permit(:value)
+  end
+
+  # ALGORITHM TO INTELLIGENTLY UNDERSTAND TEXT
+  def item_date_algo(parsed_text)
+    # 'energy bar 12th November 2020'
+    # 'pineapple 6th of July 2018'
+    # 'raw fish 5th July 2018'
+    # 'junk food 11th of May 2019'
+    # 'junk food 11 May 2019'
+    # 'watermelon 23rd of January 2023'
+    # ' raw pork tomorrow'
+    # 'Orange next week'
+    # ' egg 3 days'
+
+
+    # DDth(month)YYYY || DD(month)YYYY || Dth(month)YYYY
+    months = Date::MONTHNAMES.compact
+    combo1 = /\d{1,2}(st|nd|rd|th)?(\s?(Of)?)\s(#{months.join('|')})\s\d{4}/
+
+    # Capitalises all first character of words only
+    text = parsed_text.titleize
+
+    if text.match?(combo1)
+      result = text.match(combo1)[0]
+      item_name = text.chomp(result).strip
+      expiry_date = Date.parse(result).to_s
+    end
+
+    if item_name && expiry_date
+      return {item: item_name, date: expiry_date, error: 0}
+    elsif item_name
+      return {item: item_name, error: 0, message:'No expiry date found'}
+    elsif expiry_date
+      return {date: expiry_date, error: 0, message:'No grocery name found'}
+    else
+      return {error: 1, message:'No grocery name or expiry date found'}
+    end
+  end
+  
 end

@@ -28,3 +28,9 @@
 
 # Ignore application configuration
 /config/application.yml
+
+# Ignore all of this file
+.DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
