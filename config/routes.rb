@@ -10,10 +10,12 @@ Rails.application.routes.draw do
     end
   resources :users do    
     resources :groceries
-
+    get '/recipes' => "groceries#show_ingredients"
+    post '/recipes' => "groceries#recipes"
+    get '/result' => "groceries#result"
   end
   # resources :groceries
-
+  0
   get "/sign_in" => "clearance/sessions#new", as: "sign_in"
   delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
   get "/sign_up" => "users#new", as: "sign_up"
