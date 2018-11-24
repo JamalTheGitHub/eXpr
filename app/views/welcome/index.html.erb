@@ -1,26 +1,11 @@
 <h1 style="font-size:8vw">Welcome to Grocery!</h1>
 <% if signed_in? %>
   <%= current_user.email %>
-    <div class="avatar">
-    <%= image_tag(@user.avatar.url, alt: 'Image') if @user.avatar? %>
-    </div>
 <% end %>
 
-<style>
-img {
-    border: 2px solid #ddd;
-    border-radius: 50%;
-    padding: 5px;
-    width: 13%;
-    height: auto;
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    z-index: -1;
-}
-
-
-</style>
-
 <p> What are you waiting for?! Create listings for grocery now! <p>
+<% if signed_in? %>
 <%= button_to "Add Grocery!", new_user_grocery_path(current_user), method: :get %>
+<%=  link_to "Profile", user_path(@user) %>
+<% end %>
+
