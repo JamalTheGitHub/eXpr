@@ -75,7 +75,6 @@ class GroceriesController < ApplicationController
     ingredients = recipe_params.join(',')
     @recipes = Food2Fork::Recipe.search({q: ingredients, sort: 'r', page: 3})
     
-    byebug
     render 'result'
   end
 

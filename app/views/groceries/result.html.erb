@@ -1,5 +1,19 @@
 <h2>Here are possible recipes!</h2>
-
-<% @recipes.each do |recipe| %>
-<%= recipe.title%>
-<% end %>
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Title</th>
+      <th>Full Recipe Url</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @recipes.each do |recipe| %>
+      <tr>
+        <td><img src="<%= recipe.image_url %>" width="100" height="100"></td>
+        <td><%= recipe.title%></td>
+        <td><a href="<%= recipe.source_url%>">Check Recipe Out!</a></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
