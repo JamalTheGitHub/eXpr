@@ -57,6 +57,7 @@ $( document ).ready(function() {
     captureVideoButton.disabled = true;
     img.src = '';
     good_msg_ocr.hide();
+    error_msg_ocr.hide();
     };
 
     stopVideoButton.onclick = function() {
@@ -100,7 +101,8 @@ $( document ).ready(function() {
                 }
                 else {
                     good_msg_ocr.toggle(),
-                    exp_date_result.html(data.date)
+                    exp_date_result.html(data.date),
+                    expiry_date_form.attr('value',data.date)
                 }
             })
         })
