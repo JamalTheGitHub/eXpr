@@ -2,6 +2,7 @@
 <div id="screenshot" style="text-align:center;">
   <img id="screenshot-img">
   <video autoplay="true" id="videoElement"></video>
+  <p><button class="capture-button">Capture video</button> <button id="stop-button" disabled=''>Stop</button></p>
   </p><p><button id="screenshot-button" disabled="">Scan Expiry Date!</button></p>
   <div id="parsed-txt"></div>
 </div>
@@ -25,18 +26,30 @@ $( document ).ready(function() {
     };
 
     // THIS ACTIVATES THE CAMERA FUNCTION AND REQUESTS PERMISSSION FROM USER
-    if (navigator.mediaDevices.getUserMedia) {       
-        navigator.mediaDevices.getUserMedia(constraints)
-    .then(function(stream) {
-        video.srcObject = stream;
-    })
-    .catch(function() {
-        console.log("Something went wrong!");
-    });
+    const captureVideoButton = document.querySelector('#screenshot .capture-button');
+    const stopVideoButton = document.querySelector('#stop-button')
+    captureVideoButton.onclick = function() {
+    navigator.mediaDevices.getUserMedia(constraints).
+        then(handleSuccess);
+    };
+
+    function handleSuccess(stream) {
     screenshotButton.disabled = false;
+    video.srcObject = stream;
+    video.hidden = false;
+    stopVideoButton.disabled = false;
+    captureVideoButton.disabled = true;
+    };
+
+    stopVideoButton.onclick = function() {
+    video.srcObject.getVideoTracks().forEach(track => track.stop());
+        // video.hidden = true;
+        screenshotButton.disabled = true;
+        stopVideoButton.disabled = true;
+        captureVideoButton.disabled = false;
     }
 
-    screenshotButton.onclick = video.onclick = function() {
+    screenshotButton.onclick = function() {
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
         canvas.getContext('2d').drawImage(video, 0, 0);
