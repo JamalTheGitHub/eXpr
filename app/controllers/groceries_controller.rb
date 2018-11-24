@@ -41,7 +41,6 @@ class GroceriesController < ApplicationController
   end
 
   def edit
-    byebug
     @grocery = Grocery.find(params[:id])
   end
 

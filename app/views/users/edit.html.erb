@@ -1,14 +1,13 @@
 <div class="card">
   <div class="box">
-    <p><%= t(".opening") %></p>
-      <p>
-        <%= link_to t(".link_text", default: "Change my password"),
-          edit_user_password_url(@user, token: @user.confirmation_token.html_safe) %>
-      </p>
-
-      <p><%= raw t(".closing") %></p>
+    <h2>Update User</h2>
+    <%= form_for @user, :html => {class:'form-group'} do |form| %>
+    <%= render partial: '/users/form', object: form %>
+    <%= form.submit 'Save changes', :class => 'btn btn-primary' %>   
+    <% end %>
   </div>
 </div>
+
 
 <style>
 h2 {
