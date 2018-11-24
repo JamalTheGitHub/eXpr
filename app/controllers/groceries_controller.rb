@@ -67,12 +67,27 @@ class GroceriesController < ApplicationController
     @grocery = Grocery.find(params[:id])
   end
 
+  def show_ingredients
+  end
+
+  def recipes
+    
+    ingredients = recipe_params.join(',')
+    @recipes = Food2Fork::Recipe.search({q: ingredients, sort: 'r', page: 3})
+    
+    byebug
+    render 'result'
+  end
+
   private
   
   def grocery_params
     params.require(:grocery).permit(:ingredient, :category, :expired_date)
   end
-
+  
+  def recipe_params
+    params.require(:recipe).permit(ingredients:[])[:ingredients]
+  end
   # SET THE PARAMS TO RECEIVE AJAX REQUEST OF IMAGE DATA IN BASE64
   def img_params
     params.require(:image).permit(:base64)
