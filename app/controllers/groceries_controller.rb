@@ -34,7 +34,6 @@ class GroceriesController < ApplicationController
     file = img_params[:base64]
     data = OcrSpace::FilePost.post('/parse/image', body: { apikey: ENV['OCR_KEY'], language: 'eng', isOverlayRequired: true, base64Image: file })
     parsed_text = data.parsed_response['ParsedResults'][0]["ParsedText"].gsub(/\r|\n/, "")
-    byebug
     @result = date_algo(parsed_text)
     respond_to do |format|
       format.js {render :json => @result}
