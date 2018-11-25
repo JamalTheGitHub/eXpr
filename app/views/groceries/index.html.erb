@@ -7,46 +7,35 @@
 
   <div class="card">
     <div class="box">
-      <table class="table table-hover">
+        <table class="table table-hover">
       <thead>
-
-<h2> Create new grocery item? </h2>
-  <%= button_to "Recipes", user_recipes_path(current_user), method: :get %>
-  <%= button_to "Create Grocery", new_user_grocery_path, method: :get %>
-<h2> List of Groceries </h2>
-
-<div>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Ingredient</th>
-        <th>Expiring Date</th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% current_user.groceries.each do |grocery| %>
-
         <tr>
           <th>Item</th>
           <th>Expiring Date</th>
         </tr>
-
       </thead>
       <tbody>
-        <% current_user.groceries.each do |grocery| %>
-          <tr>
-            <td><%=grocery.ingredient%></td>
-            <td><%=grocery.expired_date%></td>
+        <% current_user.groceries.each_with_index do |grocery,i| %>
+          <tr data-toggle="collapse" data-target="#entry-<%=i%>" aria-expanded="false" aria-controls="collapseExample">
+            <div>
+              <td><%=grocery.ingredient%></td>
+              <td><%=grocery.expired_date%></td>
+            </div>
           </tr>
-            <%= link_to "Edit", edit_user_grocery_path(grocery.user, grocery) %>
-            <%= link_to "Delete", user_grocery_path(grocery.user, grocery), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <tr class="collapse" id="entry-<%=i%>">
+            <div>
+              <td><%= link_to "Edit", edit_user_grocery_path(grocery.user, grocery) %></td>
+              <td><%= link_to "Delete", user_grocery_path(grocery.user, grocery), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </div>
+          </tr>
         <% end %>
       </tbody>
       </table>
     </div>
   </div>
+    <div class="card">
+      <%= button_to "No idea what to cook? Show recipe", user_recipes_path(current_user), method: :get, class:"btn btn-outline-primary col-12 text-center" %>
+    </div>
 </div>
 
 <style>
@@ -65,7 +54,3 @@
 }
 </style>
 
-      <% end %>
-    </tbody>
-  </table>
-</div>
