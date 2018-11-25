@@ -1,23 +1,23 @@
 <div class="card-deck">
-<div class="card">
-  <div class="box">
-  <h2>New item</h2>    
-    <%= form_with scope: :grocery, url: user_groceries_path, local: true, :html => {class:'form-group'} do |form| %>
-      <p>
-        <label for="ingrdient">Item:</label>
-        <%= form.text_field :ingredient, id:'ingredient', class: "form-control" %><br/>
-      </p>
-      <p>
-        <label for="expired_date">Date of expiry:</label>
-        <%= form.date_field :expired_date, id:'exp-date', class: "form-control"%><br/>
-      </p>
-      <p>
-        <%= form.submit 'Submit', :class => 'btn btn-primary' %>   
-      </p>
-    <% end %>
+  <div class="card">
+    <div class="box">
+    <h2>New item</h2>    
+      <%= form_with scope: :grocery, url: user_groceries_path, local: true, :html => {class:'form-group'} do |form| %>
+        <p>
+          <label for="ingrdient">Item:</label>
+          <%= form.text_field :ingredient, id:'ingredient', class: "form-control" %><br/>
+        </p>
+        <p>
+          <label for="expired_date">Date of expiry:</label>
+          <%= form.date_field :expired_date, id:'exp-date', class: "form-control"%><br/>
+        </p>
+        <p>
+          <%= form.submit 'Submit', :class => 'btn btn-primary' %>   
+        </p>
+      <% end %>
 
+    </div>
   </div>
-</div>
 
     <div class = "card">
       <div class="ocr">
@@ -31,15 +31,13 @@
       </div>
     </div>
 </div>
-<%= link_to "Show", user_groceries_path(current_user)  %>
-
 
 <style>
 .card {   
     top: 3vh;
     margin: 0 auto;
     width:350px;
-    min-height:50px;
+    min-height:5px;
     background:#fff;
     box-shadow:0 20px 50px rgba(0,0,0,.1);
     border-radius:10px;
@@ -47,7 +45,8 @@
 }
 
 .voice {
-    text-align: center;  
+    text-align: center;
+    padding: 3px;  
 }
 p {
   margin: 0px;

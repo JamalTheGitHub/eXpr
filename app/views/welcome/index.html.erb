@@ -1,11 +1,53 @@
-<h1 style="font-size:8vw">Welcome to Grocery!</h1>
+<html>
+<body>
+<div class="card-deck">
+
+  <% if signed_in? %>
+  <div class="card">
+  <%= button_to "Add new item?", new_user_grocery_path(current_user), method: :get,class:"btn btn-outline-primary btn-lg col-12 text-center" %>
+  </div>
+  <% end %>
+
+<div class="card">
+<div class="box">
+<h1 style="font-size:8vw">Today</h1>
 <% if signed_in? %>
   <%= current_user.email %>
 <% end %>
 
 <p> What are you waiting for?! Create listings for grocery now! <p>
-<% if signed_in? %>
-<%= button_to "Add Grocery!", new_user_grocery_path(current_user), method: :get %>
-<%=  link_to "Profile", user_path(@user) %>
-<% end %>
+</div>
+</div>
+  <div class="card">
+    <div class="box">
+    <button type="button" class="btn btn-primary btn-block"><h5>Fresh</h5></button>
+    <button type="button" class="btn btn-warning btn-block"><h5>Expiring</h5></button>
+    <button type="button" class="btn btn-danger btn-block"><h5>Expired</h5></button>
+    </div>
+  </div>
+</div>
+</body>
+</html>
 
+
+<style>
+h1 {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  text-align: center;
+}
+
+.card {   
+    top: 15vh;
+    margin: 0 auto;
+    width:350px;
+    min-height:5px;
+    background:#fff;
+    box-shadow:0 20px 50px rgba(0,0,0,.1);
+    border-radius:10px;
+    transition:0.5s;
+}
+
+.box {
+    margin: 20px;
+}
+</style>

@@ -1,3 +1,15 @@
+
+<div class="card-deck">
+  
+  <div class="card">
+    <%= button_to "Create new item?", new_user_grocery_path, method: :get, class:"btn btn-primary col-12 text-center" %>
+  </div>
+
+  <div class="card">
+    <div class="box">
+      <table class="table table-hover">
+      <thead>
+
 <h2> Create new grocery item? </h2>
   <%= button_to "Recipes", user_recipes_path(current_user), method: :get %>
   <%= button_to "Create Grocery", new_user_grocery_path, method: :get %>
@@ -15,12 +27,44 @@
     </thead>
     <tbody>
       <% current_user.groceries.each do |grocery| %>
+
         <tr>
-          <td><%=grocery.ingredient%></td>
-          <td><%=grocery.expired_date%></td>
-          <td><%= link_to "Edit", edit_user_grocery_path(grocery.user, grocery) %></td>
-          <td><%= link_to "Delete", user_grocery_path(grocery.user, grocery), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <th>Item</th>
+          <th>Expiring Date</th>
         </tr>
+
+      </thead>
+      <tbody>
+        <% current_user.groceries.each do |grocery| %>
+          <tr>
+            <td><%=grocery.ingredient%></td>
+            <td><%=grocery.expired_date%></td>
+          </tr>
+            <%= link_to "Edit", edit_user_grocery_path(grocery.user, grocery) %>
+            <%= link_to "Delete", user_grocery_path(grocery.user, grocery), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+      </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<style>
+.card {   
+    top: 3vh;
+    margin: 0 auto;
+    width:350px;
+    min-height:5px;
+    background:#fff;
+    box-shadow:0 20px 50px rgba(0,0,0,.1);
+    border-radius:10px;
+    transition:0.5s;
+}
+.box {
+    margin: 20px;
+}
+</style>
+
       <% end %>
     </tbody>
   </table>
