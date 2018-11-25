@@ -1,6 +1,13 @@
 <html>
 <body>
 <div class="card-deck">
+
+  <% if signed_in? %>
+  <div class="card">
+  <%= button_to "Add new item?", new_user_grocery_path(current_user), method: :get,class:"btn btn-outline-primary btn-lg col-12 text-center" %>
+  </div>
+  <% end %>
+
 <div class="card">
 <div class="box">
 <h1 style="font-size:8vw">Today</h1>
@@ -9,10 +16,6 @@
 <% end %>
 
 <p> What are you waiting for?! Create listings for grocery now! <p>
-<% if signed_in? %>
-<%= button_to "Add Grocery!", new_user_grocery_path(current_user), method: :get %>
-<%=  link_to "Profile", user_path(@user) %>
-<% end %>
 </div>
 </div>
   <div class="card">

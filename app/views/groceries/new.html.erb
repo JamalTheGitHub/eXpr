@@ -1,23 +1,23 @@
 <div class="card-deck">
-<div class="card">
-  <div class="box">
-  <h2>New item</h2>    
-    <%= form_with scope: :grocery, url: user_groceries_path, local: true, :html => {class:'form-group'} do |form| %>
-      <p>
-        <label for="ingrdient">Item:</label>
-        <%= form.text_field :ingredient, id:'ingredient', class: "form-control" %><br/>
-      </p>
-      <p>
-        <label for="expired_date">Date of expiry:</label>
-        <%= form.date_field :expired_date, id:'exp-date', class: "form-control"%><br/>
-      </p>
-      <p>
-        <%= form.submit 'Submit', :class => 'btn btn-primary' %>   
-      </p>
-    <% end %>
+  <div class="card">
+    <div class="box">
+    <h2>New item</h2>    
+      <%= form_with scope: :grocery, url: user_groceries_path, local: true, :html => {class:'form-group'} do |form| %>
+        <p>
+          <label for="ingrdient">Item:</label>
+          <%= form.text_field :ingredient, id:'ingredient', class: "form-control" %><br/>
+        </p>
+        <p>
+          <label for="expired_date">Date of expiry:</label>
+          <%= form.date_field :expired_date, id:'exp-date', class: "form-control"%><br/>
+        </p>
+        <p>
+          <%= form.submit 'Submit', :class => 'btn btn-primary' %>   
+        </p>
+      <% end %>
 
+    </div>
   </div>
-</div>
 
     <div class = "card">
       <div class="ocr">
