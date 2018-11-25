@@ -9,6 +9,14 @@ class GroceriesController < ApplicationController
   end
 
   def new
+    if params[:item] && params[:expiry_date]
+      @voice_preset_new = {item: params[:item].titleize, expiry_date: params[:expiry_date]}
+    elsif params[:item]
+      @voice_preset_new = {item: params[:item].titleize}
+    elsif params[:expiry_date]
+      @voice_preset_new = {expiry_date: params[:expiry_date]}
+    end
+
     @grocery = Grocery.new
   end
   
@@ -171,15 +179,22 @@ class GroceriesController < ApplicationController
 
     # DDth(month)YYYY || DD(month)YYYY || Dth(month)YYYY
     months = Date::MONTHNAMES.compact
-    combo1 = /\d{1,2}(st|nd|rd|th)?(\s?(Of)?)\s(#{months.join('|')})\s\d{4}/
+    item_date = /\d{1,2}(st|nd|rd|th)?(\s?(Of)?)\s(#{months.join('|')})\s\d{4}/
+    date_only = /^\d{1,2}(st|nd|rd|th)?(\s?(Of)?)\s(December)\s\d{4}$/
+    
 
     # Capitalises all first character of words only
     text = parsed_text.titleize
 
-    if text.match?(combo1)
-      result = text.match(combo1)[0]
+    if text.match?(date_only)
+      result = text.match(date_only)[0]
+      expiry_date = Date.parse(result).to_s
+    elsif text.match?(item_date)
+      result = text.match(item_date)[0]
       item_name = text.chomp(result).strip
       expiry_date = Date.parse(result).to_s
+    else
+      item_name = text.chomp(result)
     end
 
     if item_name && expiry_date
@@ -189,7 +204,7 @@ class GroceriesController < ApplicationController
     elsif expiry_date
       return {date: expiry_date, error: 0, message:'No grocery name found'}
     else
-      return {error: 1, message:'No grocery name or expiry date found'}
+      return {error: 1, message:'Something went wrong.'}
     end
   end
   

@@ -48,11 +48,19 @@ recognition.onresult = function(event) {
  credentials: 'same-origin'
  }).then(function(response) {
  response.json().then(function(data){
-   console.log(data),
-   voice_output.textContent = "Voice: " + data.item + " (Expiry Date: " + data.date + ")"
-   expiry_date_form.attr('value',data.date)
-   ingredient_form.attr('value',data.item)
-   })
+   console.log(data);
+   if (data.item && data.date) {
+    voice_output.textContent = "Voice: " + data.item + " (Expiry Date: " + data.date + ")",
+    expiry_date_form.attr('value',data.date),
+    ingredient_form.attr('value',data.item)
+   } else if (data.item) {
+    voice_output.textContent = "Voice: " + data.item,
+    ingredient_form.attr('value',data.item) 
+   } else if (data.date) {
+    voice_output.textContent = "Expiry Date: " + data.date,
+    expiry_date_form.attr('value',data.date)
+   }
+  })
  })
 }
 

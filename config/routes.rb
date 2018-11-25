@@ -25,5 +25,6 @@ Rails.application.routes.draw do
   
   post '/voice', to: 'groceries#voice_analyse'
   post '/ocr', to: 'groceries#ocr_analyse'
+  post '/search', to: 'search#identify'
 
 end
