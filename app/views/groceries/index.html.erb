@@ -1,3 +1,4 @@
+
 <div class="card-deck">
   
   <div class="card">
@@ -8,10 +9,30 @@
     <div class="box">
       <table class="table table-hover">
       <thead>
+
+<h2> Create new grocery item? </h2>
+  <%= button_to "Recipes", user_recipes_path(current_user), method: :get %>
+  <%= button_to "Create Grocery", new_user_grocery_path, method: :get %>
+<h2> List of Groceries </h2>
+
+<div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Ingredient</th>
+        <th>Expiring Date</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% current_user.groceries.each do |grocery| %>
+
         <tr>
           <th>Item</th>
           <th>Expiring Date</th>
         </tr>
+
       </thead>
       <tbody>
         <% current_user.groceries.each do |grocery| %>
@@ -43,3 +64,8 @@
     margin: 20px;
 }
 </style>
+
+      <% end %>
+    </tbody>
+  </table>
+</div>

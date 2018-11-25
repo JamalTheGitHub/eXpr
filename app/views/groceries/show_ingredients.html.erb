@@ -1,0 +1,12 @@
+<%= form_with scope: :grocery, url: user_recipes_path(current_user), method: :post, local: true do |form| %>
+  <p>Check the ingredients for possible recipes!</p>
+  <% current_user.groceries.each do |grocery| %>
+    <tr>
+      <td><% check_box_tag "ingredients[]", grocery.ingredient %></td>
+      <td><%= check_box('recipe', 'ingredients', {:multiple => true}, grocery.ingredient, nil) %></td>
+      <td><%=grocery.ingredient %></td>
+      <br/>
+    </tr>
+  <% end %>
+  <%=form.submit "Search Recipes"%>
+<% end %>
