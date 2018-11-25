@@ -6,11 +6,19 @@
     <%= form_with scope: :grocery, url: user_groceries_path, local: true, :html => {class:'form-group'} do |form| %>
       <p>
         <label for="ingrdient">Item:</label>
-        <%= form.text_field :ingredient, id:'ingredient', class: "form-control", value: @voice_preset_new[:item] %><br/>
+        <% if @voice_preset_new %>
+          <%= form.text_field :ingredient, id:'ingredient', class: "form-control", value: @voice_preset_new[:item] %><br/>
+        <% else %>
+          <%= form.text_field :ingredient, id:'ingredient', class: "form-control" %><br/>
+        <% end %>
       </p>
       <p>
         <label for="expired_date">Date of expiry:</label>
-        <%= form.date_field :expired_date, id:'exp-date', class: "form-control", value: @voice_preset_new[:expiry_date] %><br/>
+        <% if @voice_preset_new %>
+          <%= form.date_field :expired_date, id:'exp-date', class: "form-control", value: @voice_preset_new[:expiry_date] %><br/>
+        <% else %>
+          <%= form.date_field :expired_date, id:'exp-date', class: "form-control" %><br/>
+        <% end %>
       </p>
       <p>
         <%= form.submit 'Submit', :class => 'btn btn-primary' %>   
