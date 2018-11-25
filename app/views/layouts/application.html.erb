@@ -25,15 +25,13 @@
     <div class="brand">
       <a class="navbar-brand" href="/">E-Fridge</a>
     </div>
-  <a href="#home" class="active">Home</a>
-  <a href="#news">News</a>
-  <a href="#contact">Contact</a>
-  <a href="/users/:user_id/groceries/new">New item</a>
     <% if signed_in? -%>  
+      <a href="/users/:id">Profile</a>
       <a href="/users/:id/groceries ">My Grocery</a>
       <a href="/sign_out" data-method="delete">Logout</a>
     <% else -%>
       <a href="/sign_in">Login</a>
+      <a href="/sign_up">Sign Up</a>
     <% end -%> 
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">
     <i class="fa fa-bars"></i>
