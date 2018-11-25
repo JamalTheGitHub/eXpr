@@ -180,7 +180,7 @@ class GroceriesController < ApplicationController
     # DDth(month)YYYY || DD(month)YYYY || Dth(month)YYYY
     months = Date::MONTHNAMES.compact
     item_date = /\d{1,2}(st|nd|rd|th)?(\s?(Of)?)\s(#{months.join('|')})\s\d{4}/
-    date_only = /^\d{1,2}(st|nd|rd|th)?(\s?(Of)?)\s(December)\s\d{4}$/
+    date_only = /^\d{1,2}(st|nd|rd|th)?(\s?(Of)?)\s(#{months.join('|')})\s\d{4}$/
     
 
     # Capitalises all first character of words only

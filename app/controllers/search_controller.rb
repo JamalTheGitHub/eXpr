@@ -32,10 +32,17 @@ class SearchController < ApplicationController
         add_new = /Add\s(New|Groceries|Grocery)\s?(Groceries|Grocery)?/
         show_all = /Show\s(All|Groceries|Grocery)\s?(Groceries|Grocery)?/
         create_recipe = /(Show|Make|Create)\s(New|Recipe|Recipes)\s?(Recipe|Recipes)?/
+        months = Date::MONTHNAMES.compact
+        add_item_date = /Add\s((\w+\s?)+\s)(\d{1,2}(st|nd|rd|th)?(\s?(Of)?)\s(#{months.join('|')})\s\d{4})/
 
 
         if text.match?(add_new)
             route = "/users/#{current_user_id}/groceries/new"
+        elsif text.match?(add_item_date)
+            date_item_result = text.match(add_item_date)
+            item = date_item_result[1].strip
+            date = Date.parse(date_item_result[3]).to_s
+            route = "users/#{current_user_id}/groceries/new?item=#{item}&expiry_date=#{date}"
         elsif text.match?(show_all)    
             route = "/users/#{current_user_id}/groceries"  
         elsif text.match?(create_recipe)    
