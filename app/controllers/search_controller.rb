@@ -46,7 +46,7 @@ class SearchController < ApplicationController
         elsif text.match?(show_all)    
             route = "/users/#{current_user_id}/groceries"  
         elsif text.match?(create_recipe)    
-            route = "/users/#{current_user_id}/recipies"            
+            route = "/users/#{current_user_id}/recipes"            
         else
             text
         end
