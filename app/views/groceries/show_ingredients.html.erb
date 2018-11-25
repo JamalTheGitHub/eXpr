@@ -1,12 +1,43 @@
-<%= form_with scope: :grocery, url: user_recipes_path(current_user), method: :post, local: true do |form| %>
-  <p>Check the ingredients for possible recipes!</p>
-  <% current_user.groceries.each do |grocery| %>
-    <tr>
-      <td><% check_box_tag "ingredients[]", grocery.ingredient %></td>
-      <td><%= check_box('recipe', 'ingredients', {:multiple => true}, grocery.ingredient, nil) %></td>
-      <td><%=grocery.ingredient %></td>
-      <br/>
-    </tr>
-  <% end %>
-  <%=form.submit "Search Recipes"%>
-<% end %>
+<div class="card">
+  <div class="box">
+    <%= form_with scope: :grocery, url: user_recipes_path(current_user), method: :post, local: true do |form| %>
+      <h5>Check the ingredients for possible recipes!</h5>
+      <% current_user.groceries.each do |grocery| %>
+        <tr>
+          <td><% check_box_tag "ingredients[]", grocery.ingredient %></td>
+          <td><%= check_box('recipe', 'ingredients', {:multiple => true}, grocery.ingredient, nil) %></td>
+          <td><%=grocery.ingredient %></td>
+          <br/>
+        </tr>
+      <% end %>
+      </br><%=form.submit "Search Recipes", :class => 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
+
+<style>
+
+.card {
+    top:13vh;
+    margin: 0 auto;
+    width:300px;
+    min-height:250px;
+    background:#fff;
+    box-shadow:0 20px 50px rgba(0,0,0,.1);
+    border-radius:10px;
+    transition:0.5s;
+}
+.card:hover {
+    box-shadow:0 30px 70px rgba(0,0,0,.2);
+}
+.card .box {
+    position:absolute;
+    top:50%;
+    left:0;
+    transform:translateY(-50%);
+    text-align:center;
+    padding:20px;
+    box-sizing:border-box;
+    width:100%;
+}
+</style>

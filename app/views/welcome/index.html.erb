@@ -20,8 +20,8 @@
 </div>
   <div class="card">
     <div class="box">
-    <button type="button" class="btn btn-primary btn-block"><h5>Fresh</h5></button>
-    <button type="button" class="btn btn-warning btn-block"><h5>Expiring</h5></button>
+    <button type="button" class="btn btn-primary btn-block"><a href="/users/:id/groceries"><h5>All items</h5></button></a>
+    <button type="button" class="btn btn-warning btn-block"><h5 id="black">Expiring</h5></button>
     <button type="button" class="btn btn-danger btn-block"><h5>Expired</h5></button>
     </div>
   </div>
@@ -37,7 +37,7 @@ h1 {
 }
 
 .card {   
-    top: 15vh;
+    top: 8vh;
     margin: 0 auto;
     width:350px;
     min-height:5px;
@@ -49,5 +49,12 @@ h1 {
 
 .box {
     margin: 20px;
+}
+h5 {
+  margin: 2px;
+  color: white;
+}
+#black {
+  color:black;
 }
 </style>
