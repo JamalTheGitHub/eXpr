@@ -94,14 +94,22 @@ class GroceriesController < ApplicationController
         @exps << grocery
       end
     end
+  end
 
-    # @exps.order(:expired_date)
+  def expired
+    groceries = User.find(params[:user_id]).groceries.order(:expired_date)
+    @expired = []
+    groceries.each do |grocery|
+      if grocery.expired? == true
+        @expired << grocery
+      end
+    end
   end
 
   private
   
   def grocery_params
-    params.require(:grocery).permit(:ingredient, :category, :expired_date)
+    params.require(:grocery).permit(:ingredient, :expired_date)
   end
   
   def recipe_params
