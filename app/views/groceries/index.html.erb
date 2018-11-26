@@ -17,7 +17,7 @@
           </tr>
       </thead>
       <tbody>
-        <% current_user.groceries.each_with_index do |grocery,i| %>
+        <% @groceries.each_with_index do |grocery,i| %>
           <tr data-toggle="collapse" data-target="#entry-<%=i%>" aria-expanded="false" aria-controls="collapseExample">
             <div>
               <td><%=grocery.ingredient%></td>
