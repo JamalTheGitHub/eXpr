@@ -15,8 +15,7 @@
             <div>
               <td><%= exp.ingredient %></td> 
               <td><%= exp.expiry_countdown %></td>
-              <td><%= link_to "Edit", user_grocery_path(exp.user, exp), method: :patch %>
-              <td><%= link_to "Remove", user_grocery_path(exp.user, exp), method: :delete %>
+              <td><%= link_to "Remove", user_grocery_path(exp.user, exp), method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </div>
           </tr>
         <% end %>

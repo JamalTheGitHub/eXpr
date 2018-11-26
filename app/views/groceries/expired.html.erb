@@ -4,7 +4,7 @@
       <thead>
         <tr>
           <th>Item</th>
-          <th>Days Left</th>
+          <th>Expiry Date</th>
         </tr>
       </thead>
       <tbody>
@@ -12,7 +12,7 @@
           <tr data-toggle="collapse" data-target="#entry-<%=i%>" aria-expanded="false" aria-controls="collapseExample">
             <div>
               <td><%= exprd.ingredient %></td> 
-              <td><%= exprd.expiry_countdown %></td>
+              <td><%= exprd.expired_date %></td>
               <td><%= link_to "Remove", user_grocery_path(exprd.user, exprd), method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </div>
           </tr>

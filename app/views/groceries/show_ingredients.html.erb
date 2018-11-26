@@ -2,15 +2,15 @@
   <div class="box">
     <%= form_with scope: :grocery, url: user_recipes_path(current_user), method: :post, local: true do |form| %>
       <h5>Check the ingredients for possible recipes!</h5>
-      <% current_user.groceries.each do |grocery| %>
+      <% @valid_items.each do |valid_item| %>
         <tr>
-          <td><% check_box_tag "ingredients[]", grocery.ingredient %></td>
-          <td><%= check_box('recipe', 'ingredients', {:multiple => true}, grocery.ingredient, nil) %></td>
-          <td><%=grocery.ingredient %></td>
+          <td><% check_box_tag "ingredients[]", valid_item.ingredient %></td>
+          <td><%= check_box('recipe', 'ingredients', {:multiple => true}, valid_item.ingredient, nil) %></td>
+          <td><%=valid_item.ingredient %></td>
           <br/>
         </tr>
       <% end %>
-      </br><%=form.submit "Search Recipes", :class => 'btn btn-primary' %>
+      <br/><%=form.submit "Search Recipes", :class => 'btn btn-primary' %>
     <% end %>
   </div>
 </div>
