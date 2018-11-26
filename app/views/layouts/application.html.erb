@@ -28,7 +28,7 @@
     </div>
     <% if signed_in? -%>  
       <%= link_to "Profile", user_path(current_user)%>
-      <a href="/users/:id/groceries ">My Grocery</a>
+      <a href="/users/<%=current_user.id%>/groceries ">My Grocery</a>
       <a href="/sign_out" data-method="delete">Logout</a>
     <% else -%>
       <a href="/sign_in">Login</a>
@@ -124,10 +124,11 @@
 
 <script>
 
+var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
+domain_name = window.location.protocol + "//" + window.location.host + "/";
 
 $('#global-search-btn').click(function(){
   event.preventDefault();
-  var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 
   var recognition = new SpeechRecognition();
   recognition.lang = 'en-US';
@@ -148,7 +149,7 @@ $('#global-search-btn').click(function(){
   
     fetch('/search', {
       method: 'post',
-      body: JSON.stringify({text: {value: voice_result}}),
+      body: JSON.stringify({text: {value: voice_result, domain: domain_name}}),
       headers: {
         'Content-Type': 'application/json',
         'X-CSRF-Token': Rails.csrfToken()

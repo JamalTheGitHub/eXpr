@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2018_11_26_060620) do
     t.string "confirmation_token", limit: 128
     t.string "remember_token", limit: 128, null: false
     t.string "avatar"
+    t.string "name"
     t.string "last_name"
     t.string "first_name"
     t.string "country"
