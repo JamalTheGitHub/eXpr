@@ -4,7 +4,7 @@ class GroceriesController < ApplicationController
   def index
     recipe_key = ENV["FOOD2FORK"]
 
-    @groceries = Grocery.all.order(:expired_date)
+    @groceries = User.find_by(id: params[:user_id]).groceries.order(:expired_date)
   end
 
   def new
@@ -46,6 +46,34 @@ class GroceriesController < ApplicationController
     respond_to do |format|
       format.js {render :json => @result_hash}
     end
+  end
+
+  def push
+    days_number = push_params[:expire].match(/\d{1,3}/).to_s.to_i
+    count = 0
+    days_name = 'days'
+    groceries = User.find_by(id: current_user.id).groceries
+    groceries.each do |g|
+      if g.expiring_within(days_number)
+        count += 1
+      end
+      if days_number == 1
+        days_name = 'day'
+      end
+    end
+    
+    Webpush.payload_send(
+      message: "You have #{count} groceries expiring in #{days_number} #{days_name}!",
+      endpoint: push_params[:endpoint],
+      p256dh: push_params[:p256dh],
+      auth: push_params[:auth],
+      ttl: 24 * 60 * 60,
+      vapid: {
+              subject: 'mailto:sender@example.com',
+              public_key: ENV['VAPID_PUBLIC_KEY'],
+              private_key: ENV['VAPID_PRIVATE_KEY']
+              }
+    )
   end
   
   def edit
@@ -97,7 +125,7 @@ class GroceriesController < ApplicationController
     groceries = User.find(params[:user_id]).groceries.order(:expired_date)
     @exps = []
     groceries.each do |grocery|
-      if grocery.expiring_within_3days? == true
+      if grocery.expiring_within(3) == true
         @exps << grocery
       end
     end
@@ -125,6 +153,15 @@ class GroceriesController < ApplicationController
   # SET THE PARAMS TO RECEIVE AJAX REQUEST OF IMAGE DATA IN BASE64
   def img_params
     params.require(:image).permit(:base64)
+  end
+
+  # PARAMS FOR WEB PUSH NOTIF
+  def push_params 
+    endpoint = params.require(:subscription).permit(:endpoint, :expirationTime, keys:{})[:endpoint]
+    p256dh = params.require(:subscription).permit(:endpoint, :expirationTime, keys:{})[:keys][:p256dh]
+    auth = params.require(:subscription).permit(:endpoint, :expirationTime, keys:{})[:keys][:auth]
+    expire_in = params.require(:expire).permit(:within)[:within]
+    hash = {endpoint: endpoint, p256dh: p256dh, auth: auth, expire: expire_in}
   end
 
   # ALGORITHM TO INTELLIGENTLY FIND DATE
