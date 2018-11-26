@@ -1,5 +1,3 @@
-<h2>Expiring within 3 Days!</h2>
-
 <div class="card">
   <div class="box">
     <table class="table table-hover">
@@ -10,13 +8,12 @@
         </tr>
       </thead>
       <tbody>
-        <% @exps.each do |exp,i| %>
+        <% @expired.each do |exprd,i| %>
           <tr data-toggle="collapse" data-target="#entry-<%=i%>" aria-expanded="false" aria-controls="collapseExample">
             <div>
-              <td><%= exp.ingredient %></td> 
-              <td><%= exp.expiry_countdown %></td>
-              <td><%= link_to "Edit", user_grocery_path(exp.user, exp), method: :patch %>
-              <td><%= link_to "Remove", user_grocery_path(exp.user, exp), method: :delete %>
+              <td><%= exprd.ingredient %></td> 
+              <td><%= exprd.expiry_countdown %></td>
+              <td><%= link_to "Remove", user_grocery_path(exprd.user, exprd), method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </div>
           </tr>
         <% end %>

@@ -22,7 +22,7 @@
     <div class="box">
     <%= button_to "All Items", user_groceries_path(current_user), type:"button", class:"btn btn-primary btn-block", method: :get %>
     <%= button_to "Expiring", user_expiries_path(current_user), type:"button", class:"btn btn-warning btn-block", method: :get %>
-    <button type="button" class="btn btn-danger btn-block"><h5>Expired</h5></button>
+    <%= button_to "Expired", user_expired_path(current_user), type:"button", class:"btn btn-danger btn-block", method: :get %>
     </div>
   </div>
 </div>
