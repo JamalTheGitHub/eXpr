@@ -50,6 +50,12 @@ $( document ).ready(function() {
     else {
         video.srcObject.getVideoTracks().forEach(track => track.stop());
         screenshotButton.disabled = true;
+        video.hidden = false;
+        img.src = '';
+        img.hidden = true;        
+        restartVideoButton.attr("hidden",true);
+        screenshotButton.hidden = false;
+        parsed_txt.html('');
     }
     };
 
