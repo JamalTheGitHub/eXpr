@@ -1,19 +1,66 @@
-<h2>Here are possible recipes!</h2>
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th>Title</th>
-      <th>Full Recipe Url</th>
-    </tr>
-  </thead>
-  <tbody>
+  <h2>Here are possible recipes!</h2>
     <% @recipes.each do |recipe| %>
       <tr>
-        <td><img src="<%= recipe.image_url %>" width="100" height="100"></td>
-        <td><%= recipe.title%></td>
-        <td><a href="<%= recipe.source_url%>">Check Recipe Out!</a></td>
+        <div class="card-deck">
+          <div class="card">
+<div class="box">
+            <div class="img">
+              <img src="<%= recipe.image_url %>" width="100" height="100">
+            </div>
+            <%= recipe.title%>
+            <a href="<%= recipe.source_url%>">Check Recipe Out!</a>
+</div>
+          </div>
+        </div>
       </tr>
     <% end %>
-  </tbody>
-</table>
+
+
+<style>
+
+.card:hover {
+    box-shadow:0 30px 70px rgba(0,0,0,.2);
+}
+
+.box {
+    margin: 20px;
+}
+
+.card {   
+    top: 3vh;
+    margin: 0 auto;
+    width:350px;
+    min-height:200px;
+    background:#fff;
+    box-shadow:0 20px 50px rgba(0,0,0,.1);
+    border-radius:10px;
+    transition:0.5s;
+}
+.card .box {
+    position:absolute;
+    top:50%;
+    left:0;
+    justify-content: center;
+    transform:translateY(-50%);
+    text-align:center;
+    box-sizing:border-box;
+}
+.card .box .img {
+    width:120px;
+    height:120px;
+    margin:0 auto;
+    border-radius:50%;
+    overflow:hidden;
+}
+.card .box .img img {
+    width:100%;
+    height:100%;
+}
+.text {
+    text-align: left;
+    font-size: 15px;
+}
+h2, p {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+</style>

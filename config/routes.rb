@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     get '/recipes' => "groceries#show_ingredients"
     post '/recipes' => "groceries#recipes"
     get '/result' => "groceries#result"
+    get '/expiries' => "groceries#expiries"
   end
   # resources :groceries
   0
