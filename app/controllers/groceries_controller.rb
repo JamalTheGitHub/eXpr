@@ -28,6 +28,7 @@ class GroceriesController < ApplicationController
       render 'new'
     end
   end
+
   
   def ocr_analyse
     file = img_params[:base64]
@@ -46,11 +47,11 @@ class GroceriesController < ApplicationController
       format.js {render :json => @result_hash}
     end
   end
-
+  
   def edit
     @grocery = Grocery.find(params[:id])
   end
-
+  
   def update
     @grocery = Grocery.find(params[:id])
     if @grocery.update(grocery_params)
@@ -59,21 +60,21 @@ class GroceriesController < ApplicationController
       render 'edit'
     end
   end
-
+  
   def destroy
     @grocery = Grocery.find(params[:id])
     @grocery.destroy
-
+    
     redirect_to user_groceries_path
   end
   
   def show
     recipe_key = ENV["FOOD2FORK"]
-
+    
     @groceries = Grocery.all
     @grocery = Grocery.find(params[:id])
   end
-
+  
   def show_ingredients
     @groceries = User.find(params[:user_id]).groceries.order(:expired_date)
     @valid_items = []
@@ -83,7 +84,7 @@ class GroceriesController < ApplicationController
       end
     end
   end
-
+  
   def recipes
     
     ingredients = recipe_params.join(',')
@@ -207,6 +208,8 @@ class GroceriesController < ApplicationController
     months = Date::MONTHNAMES.compact
     item_date = /\d{1,2}(st|nd|rd|th)?(\s?(Of)?)\s(#{months.join('|')})(\s\d{4})?/
     date_only = /^\d{1,2}(st|nd|rd|th)?(\s?(Of)?)\s(#{months.join('|')})(\s\d{4})?$/
+    item_tmr = /(Expiring\s)?Tomorrow/
+    item_days = /(Expiring\sIn\s)?(\d{1,2})\sDays/
     
 
     # Capitalises all first character of words only
@@ -219,6 +222,15 @@ class GroceriesController < ApplicationController
       result = text.match(item_date)[0]
       item_name = text.chomp(result).strip
       expiry_date = Date.parse(result).to_s
+    elsif text.match?(item_tmr)
+      result = text.match(item_tmr)[0]
+      item_name = text.chomp(result).strip
+      expiry_date = Date.tomorrow.to_s
+    elsif text.match?(item_days)
+      result = text.match(item_days)[0]
+      days_ahead = text.match(item_days)[2]
+      item_name = text.chomp(result).strip
+      expiry_date = (Date.today + days_ahead).to_s
     else
       item_name = text.chomp(result)
     end
