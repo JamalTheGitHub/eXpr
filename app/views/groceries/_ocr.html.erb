@@ -1,13 +1,15 @@
 <%# VIDEO STREAM %>
-  <button id="capture-button"class="btn btn-primary col-12 text-center" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+  <button id="capture-button"class="btn btn-primary col-12 text-center" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" data-status='videoOff'>
     Capture the expiry date?
   </button>
   <div class="collapse" id="collapseExample">
         <div id="screenshot" style="text-align:center;">
-            <img id="screenshot-img">
-            <video autoplay="true" id="videoElement"></video>
-            <p><button class="capture-button btn btn-primary btn-sm">Capture video</button> <button class="btn btn-primary btn-sm"id="stop-button" disabled=''>Stop</button></p>
-            <p><button class="btn btn-primary btn-sm"id="screenshot-button" disabled="">Scan Expiry Date!</button></p>
+            <video autoplay="true" id="videoElement" style="display: block;"></video>
+            <img id="screenshot-img" hidden>
+            <p>
+                <button class="btn btn-primary btn-sm" id='rescan-button' hidden>Scan Again</button> 
+                <button class="btn btn-primary btn-sm"id="screenshot-button" disabled="">Scan Expiry Date!</button>
+            </p>
                 <div id="parsed-txt"></div>
         </div>
 </div>
@@ -32,25 +34,47 @@ $( document ).ready(function() {
 
     // THIS ACTIVATES THE CAMERA FUNCTION AND REQUESTS PERMISSSION FROM USER
     const captureVideoButton = document.querySelector('#capture-button');
-    const stopVideoButton = document.querySelector('#stop-button')
+    const restartVideoButton = $('#rescan-button')
+    
     captureVideoButton.onclick = function() {
-    navigator.mediaDevices.getUserMedia(constraints).
-        then(handleSuccess);
-    };
-
-    function handleSuccess(stream) {
-    screenshotButton.disabled = false;
-    video.srcObject = stream;
-    video.hidden = false;
-    stopVideoButton.disabled = false;
-    };
-
-    stopVideoButton.onclick = function() {
-    video.srcObject.getVideoTracks().forEach(track => track.stop());
-        screenshotButton.disabled = true;
-        stopVideoButton.disabled = true;
-        captureVideoButton.disabled = false;
+    
+    if(captureVideoButton.getAttribute('aria-expanded')=='false'){
+        navigator.mediaDevices.getUserMedia(constraints).
+            then(handleSuccess);
+        function handleSuccess(stream) {
+            screenshotButton.disabled = false;
+            video.srcObject = stream;
+            video.hidden = false;
+        };
     }
+    else {
+        video.srcObject.getVideoTracks().forEach(track => track.stop());
+        screenshotButton.disabled = true;
+        video.hidden = false;
+        img.src = '';
+        img.hidden = true;        
+        restartVideoButton.attr("hidden",true);
+        screenshotButton.hidden = false;
+        parsed_txt.html('');
+    }
+    };
+
+    restartVideoButton.click(function() {
+        video.hidden = false;
+        img.src = '';
+        img.hidden = true;
+        navigator.mediaDevices.getUserMedia(constraints).
+            then(handleSuccess);
+        function handleSuccess(stream) {
+            screenshotButton.disabled = false;
+            video.srcObject = stream;
+        };
+        restartVideoButton.attr("hidden",true);
+        screenshotButton.hidden = false;
+        parsed_txt.html('');
+
+    });
+
 
     screenshotButton.onclick = function() {
         canvas.width = video.videoWidth;
@@ -59,10 +83,15 @@ $( document ).ready(function() {
 
         // Assign image data to the image tag
         img.src = canvas.toDataURL('image/png');
+        img.hidden = false;
 
         // Stop all video streams.
         video.srcObject.getVideoTracks().forEach(track => track.stop());
-        video.hidden = true
+        video.hidden = true;
+        screenshotButton.hidden = true;
+        restartVideoButton.removeAttr('hidden');
+        restartVideoButton.attr('disabled','true');
+        restartVideoButton.html('Scanning...');
 
         // Handle POST request to API
         fetch('/ocr', {
@@ -74,12 +103,15 @@ $( document ).ready(function() {
             },
             credentials: 'same-origin'
             }).then(function(response) {
+            restartVideoButton.removeAttr('disabled');
+            restartVideoButton.html('Scan Again'); 
+    
             response.json().then(function(data){
                 if ( (data.error == 1) ) {
                     parsed_txt.html("No readable date in the image")
                 }
                 else {
-                    parsed_txt.html("<p>Expiry Date: " + data.date),
+                    parsed_txt.html("<p>Expiry Date: " + data.date + "</p>"),
                     expiry_date_form.attr('value',data.date)
                 }
             })
@@ -92,8 +124,9 @@ $( document ).ready(function() {
 </script>
 
 <style>
-#videoElement {
+#videoElement, #screenshot-img {
     width: 100%;
+    background-color: #666;
 }
 p {
     padding: 2px;

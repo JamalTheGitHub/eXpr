@@ -27,8 +27,8 @@
       <a class="navbar-brand" href="/">E-Fridge</a>
     </div>
     <% if signed_in? -%>  
-      <%= link_to "Profile", user_path(current_user)%>
       <a href="/users/:id/groceries ">My Grocery</a>
+      <%= link_to "Profile", user_path(current_user)%>
       <a href="/sign_out" data-method="delete">Logout</a>
     <% else -%>
       <a href="/sign_in">Login</a>

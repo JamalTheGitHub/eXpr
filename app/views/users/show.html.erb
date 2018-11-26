@@ -1,7 +1,7 @@
 <div class="card">
     <div class="box">
         <div class="img">
-            <%= image_tag(@user.avatar.url, alt: 'Image') if @user.avatar? %>
+            <%= image_tag(@user.avatar? ? @user.avatar.url : asset_path("profilepic.png"), alt: 'Image') %>
         </div>
         <h2><%=@user.last_name%> <%=@user.first_name%><br></h2>
         <div class= "text">
@@ -10,7 +10,7 @@
         <p>Second name: <%=@user.last_name%> </p>
         <p>Country: <%=@user.country%> <p>
         </div>
-<%= link_to 'Edit', edit_user_path(@user) %>
+            <%= link_to 'Edit profile', edit_user_path(@user), class:"btn btn-primary" %>
     </div>
 </div>
 
@@ -20,7 +20,7 @@
     top:15vh;
     margin: 0 auto;
     width:300px;
-    min-height:400px;
+    min-height:450px;
     background:#fff;
     box-shadow:0 20px 50px rgba(0,0,0,.1);
     border-radius:10px;
