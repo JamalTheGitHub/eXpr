@@ -7,12 +7,13 @@
 
   <div class="card">
     <div class="box">
-      <h3>All item</h3>
+      <h3>My Groceries</h3>
+      <p>Today: <%=Time.now.strftime("%A, ")%><%=Date.today.to_formatted_s(:rfc822)%></p>
         <table class="table table-hover">
       <thead>
         <tr>
           <th>Item</th>
-          <th>Expiring Date</th>
+          <th nowrap>Expiring Date</th>
           <th>Actions</th>
           </tr>
       </thead>
@@ -20,10 +21,15 @@
         <% @groceries.each_with_index do |grocery,i| %>
           <tr data-toggle="collapse" data-target="#entry-<%=i%>" aria-expanded="false" aria-controls="collapseExample">
             <div>
-              <td><%=grocery.ingredient%></td>
-              <td><%=grocery.expired_date%></td>
-              <td><%= link_to '<i class="icon-ok icon-white"></i>	&#9998;'.html_safe, edit_user_grocery_path(grocery.user, grocery) %>
-              <%= link_to '<i class="icon-ok icon-white"></i>	&#10008;'.html_safe, user_grocery_path(grocery.user, grocery), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <% if grocery.expired?%>
+                <td style="color:red"><%=grocery.ingredient%></td>
+                <td style="text-align:center; color:red"><%=grocery.expired_date%></td>
+              <% else %>
+                <td><%=grocery.ingredient%></td>
+                <td style="text-align:center"><%=grocery.expired_date%></td>
+              <% end %>
+              <td style="text-align:center"><%= link_to '<i class="icon-ok icon-white"></i>	&#9998;'.html_safe, edit_user_grocery_path(grocery.user, grocery) %>
+              &nbsp&nbsp&nbsp<%= link_to '<i class="icon-ok icon-white"></i>	&#10008;'.html_safe, user_grocery_path(grocery.user, grocery), method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </div>
           </tr>
           <tr class="collapse" id="entry-<%=i%>">
