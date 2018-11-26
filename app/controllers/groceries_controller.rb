@@ -115,39 +115,39 @@ class GroceriesController < ApplicationController
       combo7 = /\d{6}/
 
       if text.match?(combo1)
-        result = combo1.match(text)
+        result = combo1.match(text)[0]
         if result[1].to_i < Date.today.year
-          expiry_date = Date.parse(result[0][2..-1]).to_s
+          expiry_date = Date.parse(result[2..-1]).to_s
         else
-          expiry_date = Date.parse(result.to_s).to_s
+          expiry_date = Date.parse(result).to_s
         end
       elsif text.match?(combo2)
-        result = combo2.match(text)
+        result = combo2.match(text)[0]
         if result[1].to_i < Date.today.year
-          expiry_date = Date.parse(result[0][0..7]).to_s
+          expiry_date = Date.parse(result[0..7]).to_s
         else
-          expiry_date = Date.parse(result.to_s).to_s
+          expiry_date = Date.parse(result).to_s
         end
 
       elsif text.match?(combo3)
-        result = combo3.match(text)
-        expiry_date = Date.parse(result.to_s).to_s
+        result = combo3.match(text)[0]
+        expiry_date = Date.parse(result).to_s
 
       elsif text.match?(combo4)
-        result = combo4.match(text)
-        expiry_date = Date.parse(result.to_s).to_s
+        result = combo4.match(text)[0]
+        expiry_date = Date.parse(result).to_s
 
       elsif text.match?(combo5)
-        result = combo5.match(text)
-        expiry_date = Date.parse(result.to_s).to_s
+        result = combo5.match(text)[0]
+        expiry_date = Date.parse(result).to_s
 
       elsif text.match?(combo6)
-        result = combo6.match(text)
-        expiry_date = Date.parse(result.to_s).to_s
+        result = combo6.match(text)[0]
+        expiry_date = Date.parse(result).to_s
 
       elsif text.match?(combo7)
-        result = combo7.match(text)
-        expiry_date = Date.parse(result.to_s).to_s
+        result = combo7.match(text)[0]
+        expiry_date = Date.parse(result).to_s
       end
      end
 
