@@ -1,6 +1,6 @@
 <div class="card">
   <div class="box">
-    <h2>Update User</h2>
+    <h2>Edit Profile</h2>
     <%= form_for @user, :html => {class:'form-group'} do |form| %>
     <%= render partial: '/users/form', object: form %>
     <%= form.submit 'Save changes', :class => 'btn btn-primary' %>   
@@ -10,9 +10,6 @@
 
 
 <style>
-h2 {
-  font-family: "Comic Sans MS", cursive, sans-serif;
-}
 
 .card {
     top: 4vh; 
@@ -28,5 +25,9 @@ h2 {
 
 .box {
     margin: 20px;
+}
+
+h2 {
+  margin-bottom: 0.5em;
 }
 </style>
