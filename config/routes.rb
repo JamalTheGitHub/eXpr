@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       controller: "clearance/passwords",  
       only: [:create, :edit, :update]
     end
-  resources :users do    
+  resources :users do
     resources :groceries
     get '/recipes' => "groceries#show_ingredients"
     post '/recipes' => "groceries#recipes"
@@ -22,7 +22,6 @@ Rails.application.routes.draw do
   delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
   get "/sign_up" => "users#new", as: "sign_up"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
   root "welcome#index"
   
   # CUSTOM ROUTES 

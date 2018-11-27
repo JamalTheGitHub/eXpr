@@ -29,8 +29,8 @@
     </div>
     
     <% if signed_in? -%>  
-      <%= link_to "Profile", user_path(current_user)%>
-      <a href="/users/<%=current_user.id%>/groceries ">My Grocery</a>
+
+      <%= link_to "My Grocery", user_groceries_path(current_user)%>
       <%= link_to "Profile", user_path(current_user)%>
       <a href="/sign_out" data-method="delete">Logout</a>
     <% else -%>
