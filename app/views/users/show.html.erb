@@ -1,56 +1,50 @@
-<div class="card">
-    <div class="box">
-        <div class="img">
-            <%= image_tag(@user.avatar? ? @user.avatar.url : asset_path("profilepic.png"), alt: 'Image') %>
+<div class-"card-deck">
+    <div class="card">
+        <div class="box">
+            <div class="img">
+                <%= image_tag(@user.avatar? ? @user.avatar.url : asset_path("profilepic.png"), alt: 'Image') %>
+            </div>
+            <h2><%=@user.last_name%> <%=@user.first_name%><br></h2>
+            <div class= "text">
+            <p>Email: <%=@user.email%> </p>
+            <p>First name: <%=@user.first_name%> </p>
+            <p>Second name: <%=@user.last_name%> </p>
+            <p>Country: <%=@user.country%> <p>
+            </div>
+                <%= link_to 'Edit profile', edit_user_path(@user), class:"btn btn-primary" %>
         </div>
-        <h2><%=@user.last_name%> <%=@user.first_name%><br></h2>
-        <div class= "text">
-        <p>Email: <%=@user.email%> </p>
-        <p>First name: <%=@user.first_name%> </p>
-        <p>Second name: <%=@user.last_name%> </p>
-        <p>Country: <%=@user.country%> <p>
+    </div>
+    <div class='card'>
+        <div class='box'>
+            <div class='text'>
+                <h3>Preferences</h3>
+                <p>Be notified of expiring groceries within how many days?</p>
+                <%= form_with url: push_path, id:'notif-form', remote: :true do |form| %>   
+                    <%=form.number_field( :expire, in: 0...10, class:'form-control', id:'exp-day-input')%><br/>
+                    <%=form.submit :Submit, class:'btn btn-primary', id:'submit-btn'%>
+                <% end %>
+            </div>
         </div>
-            <%= link_to 'Edit profile', edit_user_path(@user), class:"btn btn-primary" %>
     </div>
 </div>
-
-<div class='card'>
-  <div class='box'>
-    <div class='text'>
-        <h3>Preferences</h3>
-        <p>Be notified of expiring groceries within how many days?</p>
-        <%= form_with url: push_path, id:'notif-form', remote: :true do |form| %>   
-            <%=form.number_field( :expire, in: 0...10, class:'form-control', id:'exp-day-input')%>
-            <%=form.submit :Submit, class:'btn btn-primary', id:'submit-btn'%>
-        <% end %>
-    </div>
-  </div>
-</div>
-
 
 <style>
 .card {
-    top:15vh;
+    top:5vh;
     margin: 0 auto;
-    width:300px;
-    min-height:450px;
+    margin-bottom: 20px;
+    width:350px;
+    min-height:30px;
     background:#fff;
     box-shadow:0 20px 50px rgba(0,0,0,.1);
     border-radius:10px;
     transition:0.5s;
 }
+.box {
+    margin: 20px; 
+}
 .card:hover {
     box-shadow:0 30px 70px rgba(0,0,0,.2);
-}
-.card .box {
-    position:absolute;
-    top:50%;
-    left:0;
-    transform:translateY(-50%);
-    text-align:center;
-    padding:20px;
-    box-sizing:border-box;
-    width:100%;
 }
 .card .box .img {
     width:120px;
@@ -69,6 +63,9 @@
 }
 h2, p {
   font-family: "Comic Sans MS", cursive, sans-serif;
+}
+h2{
+    text-align: center;
 }
 </style>
 

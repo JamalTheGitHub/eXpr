@@ -18,9 +18,9 @@
 </div>
   <div class="card">
     <div class="box">
-    <%= button_to "All Items", user_groceries_path(current_user), type:"button", class:"btn btn-primary btn-block", method: :get %>
-    <%= button_to "Expiring", user_expiries_path(current_user), type:"button", class:"btn btn-warning btn-block", method: :get %>
-    <%= button_to "Expired", user_expired_path(current_user), type:"button", class:"btn btn-danger btn-block", method: :get %>
+    <div class="button"><%= button_to "All Items", user_groceries_path(current_user), type:"button", class:"btn btn-primary btn-block", method: :get %></div>
+    <div class="button"><%= button_to "Expiring", user_expiries_path(current_user), type:"button", class:"btn btn-warning btn-block", method: :get %></div>
+    <div id="button1"><%= button_to "Expired", user_expired_path(current_user), type:"button", class:"btn btn-danger btn-block", method: :get %></div>
     </div>
   </div>
 </div>
@@ -33,7 +33,12 @@ h1 {
   font-family: "Comic Sans MS", cursive, sans-serif;
   text-align: center;
 }
-
+.button {
+  margin-bottom:10px;
+}
+#button1 {
+  margin:0;
+}
 .card {   
     top: 8vh;
     margin: 0 auto;

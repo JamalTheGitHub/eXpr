@@ -21,7 +21,7 @@ class UsersController < Clearance::UsersController
       @user = current_user
 
       # This required for mobile push notification
-      if current_user
+      if current_user 
         @decodedVapidPublicKey = Base64.urlsafe_decode64(ENV['VAPID_PUBLIC_KEY']).bytes
       end
     end

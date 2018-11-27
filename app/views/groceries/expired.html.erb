@@ -5,12 +5,8 @@
       <thead>
         <tr>
           <th>Item</th>
-
           <th>Days Past</th>
           <th>Action</th>
-
-          <th>Expiry Date</th>
-
         </tr>
       </thead>
       <tbody>
@@ -21,16 +17,7 @@
 
               <td><%= -exprd.expiry_countdown %></td>
               <td><%= link_to '<i class="icon-ok icon-white"></i>	&#10008;'.html_safe, user_grocery_path(exprd.user, exprd), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-
-              <td><%= exprd.expired_date %></td>
             </div>
-          </tr>
-          <tr class="collapse" id="entry-<%=i%>">
-            <div>
-              <td><%= link_to "Remove", user_grocery_path(exprd.user, exprd), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-
-            </div>
-          </tr>
         <% end %>
       </tbody>
     </table>

@@ -29,7 +29,6 @@
     </div>
     
     <% if signed_in? -%>  
-      <%= link_to "Profile", user_path(current_user)%>
       <a href="/users/<%=current_user.id%>/groceries ">My Grocery</a>
       <%= link_to "Profile", user_path(current_user)%>
       <a href="/sign_out" data-method="delete">Logout</a>
@@ -55,6 +54,7 @@
 </body>
 
 <style>
+
 #global-search-btn {
   font-size: 20px;
 }
@@ -142,7 +142,7 @@ $('#global-search-btn').click(function(){
   recognition.maxAlternatives = 1;
   // VOICE RECOGNITION SEGMENT
   recognition.start();
-  
+
   recognition.onspeechend = function() {
     recognition.stop();
   }
