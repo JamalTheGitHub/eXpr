@@ -14,6 +14,19 @@
     </div>
 </div>
 
+<div class='card'>
+  <div class='box'>
+    <div class='text'>
+        <h3>Preferences</h3>
+        <p>Be notified of expiring groceries within how many days?</p>
+        <%= form_with url: push_path, id:'notif-form', remote: :true do |form| %>   
+            <%=form.number_field( :expire, in: 0...10, class:'form-control', id:'exp-day-input')%>
+            <%=form.submit :Submit, class:'btn btn-primary', id:'submit-btn'%>
+        <% end %>
+    </div>
+  </div>
+</div>
+
 
 <style>
 .card {
@@ -58,3 +71,53 @@ h2, p {
   font-family: "Comic Sans MS", cursive, sans-serif;
 }
 </style>
+
+
+
+
+<script>
+// When serviceWorker is supported, installed, and activated,
+// subscribe the pushManager property with the vapidPublicKey
+$( document ).ready(function() {
+    window.vapidPublicKey = new Uint8Array(<%= @decodedVapidPublicKey %>);
+    
+    navigator.serviceWorker.ready.then((serviceWorkerRegistration) => {
+        serviceWorkerRegistration.pushManager
+        .subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: window.vapidPublicKey
+        });
+        console.log('pushManager subscribed')
+    });
+
+
+
+    $('#submit-btn').click(function(e) {
+        e.preventDefault();
+        var values = $('#exp-day-input').serialize();
+        console.log(values)
+
+        navigator.serviceWorker.ready
+        .then((serviceWorkerRegistration) => {
+          serviceWorkerRegistration.pushManager.getSubscription()
+          .then((subscription) => {
+            console.log(subscription),
+            
+      
+            fetch('/push', {
+            method: 'post',
+            body: JSON.stringify({subscription: subscription, expire: {within: values}}),
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': Rails.csrfToken()
+            },
+            credentials: 'same-origin'
+            })
+      
+      
+          });
+        });
+      });
+
+});
+</script>

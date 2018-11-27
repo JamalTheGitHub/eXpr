@@ -1,5 +1,6 @@
 class WelcomeController < ApplicationController
     def index
+
         if signed_in?
             @groceries = User.find(current_user.id).groceries
             @exps = []
