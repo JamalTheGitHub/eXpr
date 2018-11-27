@@ -11,8 +11,6 @@ const ingredient_form = $('#ingredient')
 const expiry_date_form = $('#exp-date')
 const record_btn = document.querySelector('#voice-record-button')
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
-var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
-var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
 
 var recognition = new SpeechRecognition();
 recognition.lang = 'en-US';

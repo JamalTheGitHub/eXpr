@@ -1,8 +1,6 @@
 class GroceriesController < ApplicationController
-  require 'ocr_space'
 
   def index
-    recipe_key = ENV["FOOD2FORK"]
 
     @groceries = User.find(params[:user_id]).groceries.order(:expired_date)
   end
@@ -94,13 +92,6 @@ class GroceriesController < ApplicationController
     @grocery.destroy
     
     redirect_to user_groceries_path
-  end
-  
-  def show
-    recipe_key = ENV["FOOD2FORK"]
-    
-    @groceries = Grocery.all
-    @grocery = Grocery.find(params[:id])
   end
   
   def show_ingredients
