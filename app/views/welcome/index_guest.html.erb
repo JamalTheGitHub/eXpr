@@ -1,18 +1,19 @@
-<link href='https://fonts.googleapis.com/css?family=Rye' rel='stylesheet'>
-    <div id="mobile" class='d-flex justify-content-center align-items-center'>
-        <div id="logo">
-        <%= image_tag( asset_path ('expr-logo-1309x1309.png'))%>
-        </div>
-        <h3> Food wasting made hard!</h3>
-        <div class="user">
-        <p><strong>Don't have an account?</strong>  <a href="/sign_up" class="btn btn-primary">Sign Up</a></p>
-        <p><strong>Already an user?</strong>  <a href="/sign_in" class="btn btn-primary">Login</a></p>
-        </div>
+<link href="https://fonts.googleapis.com/css?family=Heebo:700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Quicksand:300" rel="stylesheet">
+
+    <div id="mobile">
+        <h3 id='main-title' >Save Your Groceries</h3>
+        <h3 id='sub-title' >Be reminded of expiry dates & conquer your fridge.</h3>
+        <%=image_tag("medal.png", id:'medal-pix', class:'center')%>
+        <p id='award-sub' >"The best expiry date reminders app, powerful & convenient!" ~Awesome Reviewer</p>
     </div>
-</body>
+    <div id='user'>
+        <p><strong>Don't have an account?</strong>  <a href="/sign_up" class="btn btn-primary btn-sm">Sign Up</a></p>
+        <p><strong>Already a user?</strong>  <a href="/sign_in" class="btn btn-primary btn-sm">Log In</a></p>
+    </div>
 <style>
 body, html {
-    height: 100%;
+    height: 100vh;
 
 }
 p {
@@ -29,32 +30,72 @@ p {
     background-repeat: no-repeat;
     background-size: cover;
     background-image: url(<%= asset_path("mobilebackground.jpg")%>);
+    box-shadow: 0 0 0.5em 0.3em rgba(83, 83, 83, 0.7);
     position:absolute;
+    top:3em;
 }
 
-img {
-    width:10em;
-    height:10em;
-    position:absolute;
-    top: 50%;
-    margin: 0 auto;
-    margin-top: -270px; /* Half the height */
-    margin-left: -80px; /* Half the width */
-    left: 50%;
+#sub-title {
+    font-family: 'Quicksand';
+    font-size: 0.85em;
+    color: white;
+    text-align:center;
+    position: relative;
+    top: 3em;
+    text-shadow: 2px 2px 5px rgba(30,30,30,1);
 }
-#mobile h3 {   
+
+#main-title{   
     height: 100px;
     min-width: 350px;
-    font-family: 'Rye';font-size: 43px;
+    font-family: 'Heebo';
+    font-size: 2em;
+    font-weight: bold;
     text-align:center;
     margin:0 auto;
+    color: white;
+    position: relative;
+    top: 3.2em;
+    text-shadow: 2px 2px 10px rgba(30,30,30,1);
 }
-#mobile .user {
+#award-sub{
+    color: white;
+    text-align:center;
+    font-family: 'Quicksand';
+    font-size: 0.85em;
+    font-style: italic;
+    position: relative;
+    text-shadow: 2px 2px 5px rgba(30,30,30,1);    
+    top: 4em;
+
+}
+
+#medal-pix {
+    width: 5em;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position:relative;
+    top: 4em;
+}
+
+#user{
     position: absolute;
     text-align: center;
-    bottom: 130px;
+    top: 25em;
     margin: 0 auto;
-
+    width: 100vw;
     min-width: 350px;
+    text-shadow: 2px 2px 5px rgba(30,30,30,1);
+
+}
+#user a{
+    box-shadow: 0.2em 0.2em 0.8em 0.1em rgba(83, 83, 83, 0.5);
+}
+
+#user p {
+    margin-bottom: 1em;
+    color: white;
+    font-size: 0.9em;
 }
 </style>
