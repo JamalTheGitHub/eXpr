@@ -15,6 +15,14 @@ class SearchController < ApplicationController
         end
     end
 
+    def find
+        result = search_index_params[:value]
+        @result_groceries = User.find_by(id:current_user.id).groceries.search(result)
+        respond_to do |f|
+            f.json {render :json => @result_groceries}
+        end
+    end
+
 
 
 
@@ -24,6 +32,14 @@ class SearchController < ApplicationController
 
     def voice_params
         params.require(:text).permit(:value, :domain)
+    end
+
+    def test_singularity(str)
+        str.pluralize != str && str.singularize == str
+    end
+
+    def search_index_params
+        params.require(:search).permit(:value)
     end
 
     def global_search_algo(voice_result,domain_name)

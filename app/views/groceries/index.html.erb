@@ -9,6 +9,13 @@
     <div class="box">
       <h3>My Groceries</h3>
       <p>Today: <%=Time.now.strftime("%A, ")%><%=Date.today.to_formatted_s(:rfc822)%></p>
+
+<div class="ui-widget form-inline mb-2">
+  <input id="tags" type="text" placeholder="Search.." class='form-control col-8 mr-2'>
+  <button id='tag-find' class='btn-sm btn-primary mr-2'>Find!</button>
+  <button id='stop-search' class='btn-sm btn-default' style="display: none;">Clear</button>
+</div>
+
         <table class="table table-hover">
       <thead>
         <tr>
@@ -17,10 +24,9 @@
           <th>Actions</th>
           </tr>
       </thead>
-      <tbody>
+      <tbody id='original-index'>
         <% @groceries.each_with_index do |grocery,i| %>
-          <tr data-toggle="collapse" data-target="#entry-<%=i%>" aria-expanded="false" aria-controls="collapseExample">
-            <div>
+          <tr>
               <% if grocery.expired?%>
                 <td style="color:red"><%=grocery.ingredient%></td>
                 <td style="text-align:center; color:red"><%=grocery.expired_date%></td>
@@ -30,14 +36,13 @@
               <% end %>
               <td style="text-align:center"><%= link_to '<i class="icon-ok icon-white"></i>	&#9998;'.html_safe, edit_user_grocery_path(grocery.user, grocery) %>
               &nbsp&nbsp&nbsp<%= link_to '<i class="icon-ok icon-white"></i>	&#10008;'.html_safe, user_grocery_path(grocery.user, grocery), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            </div>
-          </tr>
-          <tr class="collapse" id="entry-<%=i%>">
-            <div>
-            </div>
           </tr>
         <% end %>
       </tbody>
+      <%# Search results %>
+      <tbody id='search-index' style="display: none;">
+      </tbody>
+      
       </table>
     </div>
   </div>
@@ -65,4 +70,84 @@ h3 {
 
 }
 </style>
+
+
+<script>
+  $( function() {
+    var availableTags = [
+      <%@groceries.each do |g|%>
+        "<%=g.ingredient%>",
+      <% end %>
+    ];
+    $( "#tags" ).autocomplete({
+      source: availableTags
+    });
+  } );
+
+  $('#tag-find').click( function() {
+    // copy from enterkey code
+
+  });
+
+  // Return back the old index
+  $('#stop-search').click( function() {
+    $('#tags').removeClass('col-6').addClass('col-8');
+    $('#stop-search').hide();
+    $('#original-index').show()
+  });
+
+  // Code to run when enter key is run, and has an id enterKey
+  $('#tags').bind("enterKey",function(e){
+    console.log($('#tags').val())
+
+    $('#tags').removeClass('col-8').addClass('col-6');
+    $('#stop-search').show();
+
+    fetch('/index_search', {
+        method: 'post',
+        body: JSON.stringify({search: {value: $('#tags').val()}}),
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': Rails.csrfToken()
+        },
+        credentials: 'same-origin'
+        }).then(function(response) {
+
+        response.json().then(function(data){
+          $('#original-index').hide()
+
+          $.each(data, function(i,g){
+            const today = new Date()
+            const day = today.getDate()
+            const month = today.getMonth() + 1
+            const year = today.getFullYear()
+            if (g.expired_date <= (year+'-'+month+'-'+day)) {
+            console.log(g.expired_date + 'EXPIRED')
+            const table_row = $("<tr></tr>")
+            const table_data_name = $('<td style="color:red"></td>').html(g.ingredient)
+            const table_data_date = $('<td style="text-align:center; color:red"></td>').html(g.expired_date)
+            const table_data_btn = $('<td style="text-align:center"></td>').html("<a href=\"/users/<%=current_user.id%>/groceries/"+ g.id +"/edit\"><i class=\"icon-ok icon-white\"></i>	✎</a>" + "&nbsp;&nbsp;&nbsp;" + "<a data-confirm=\"Are you sure?\" rel=\"nofollow\" data-method=\"delete\" href=\"/users/<%=current_user.id%>/groceries/"+ g.id + "\"><i class=\"icon-ok icon-white\"></i>	✘</a>")
+            new_table = table_row.append(table_data_name).append(table_data_date).append(table_data_btn)
+            $('#search-index').append(new_table)
+            }
+            else{
+            console.log(year+'-'+month+'-'+day + 'FRESH')              
+            }
+          })
+
+          $('#search-index').show()
+
+        })
+    })  
+
+  });
+
+  // Event when enter is pressed in tags input form
+  $('#tags').keyup(function(e){
+      if(e.keyCode == 13)
+      {
+          $(this).trigger("enterKey");
+      }
+  });
+</script>
 
