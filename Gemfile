@@ -86,3 +86,6 @@ gem 'serviceworker-rails'
 
 # Webpush to generate VAPID keys for push notif
 gem 'webpush'
+
+# Search gem with PostGreSQL
+gem 'pg_search'

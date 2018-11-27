@@ -1,6 +1,10 @@
 class Grocery < ApplicationRecord
   belongs_to :user
 
+  include PgSearch
+
+  pg_search_scope :search, against: [:ingredient]
+
   def expiry_countdown
     (self.expired_date - Date.today).to_i
   end
