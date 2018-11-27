@@ -17,7 +17,7 @@
     <div class='card'>
         <div class='box'>
             <div class='text'>
-                <h3>Preferences</h3>
+                <h2>Notifications</h2>
                 <p>Be notified of expiring groceries within how many days?</p>
                 <%= form_with url: push_path, id:'notif-form', remote: :true do |form| %>   
                     <%=form.number_field( :expire, in: 0...10, class:'form-control', id:'exp-day-input')%><br/>
@@ -61,11 +61,9 @@
     text-align: left;
     font-size: 15px;
 }
-h2, p {
-  font-family: "Comic Sans MS", cursive, sans-serif;
-}
 h2{
     text-align: center;
+    margin-bottom: 0.5em;
 }
 </style>
 
