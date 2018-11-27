@@ -89,3 +89,5 @@ gem 'webpush'
 
 # Search gem with PostGreSQL
 gem 'pg_search'
+
+gem 'rails_12factor'

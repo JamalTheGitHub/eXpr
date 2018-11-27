@@ -1,15 +1,15 @@
 <h3>Choose your food!</h3>
-  <div class="card-deck">
-    <% @recipes.each do |recipe| %>
-      <div class="card">
-        <div class="card-body">
-          <%= recipe.title%>
-          <img src="<%= recipe.image_url %>" width="100" height="100">
-          <p><a href="<%= recipe.source_url%>">Check Recipe Out!</a></p>
-        </div>  
-      </div>
-    <% end %>
-  </div>
+<div class="card-deck">
+  <% @recipes.each do |recipe| %>
+    <div class="card">
+      <div class="card-body">
+        <%= recipe.title%>
+        <img src="<%= recipe.image_url %>" width="100" height="100">
+        <p><a href="<%= recipe.source_url%>">Check Recipe Out!</a></p>
+      </div>  
+    </div>
+  <% end %>
+</div>
 
 <style>
 h3 {
