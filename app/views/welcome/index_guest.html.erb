@@ -3,9 +3,7 @@
         <div id="logo">
         <%= image_tag( asset_path ('expr-logo-1309x1309.png'))%>
         </div>
-        <div class='header-txt'>
         <h3> Food wasting made hard!</h3>
-        </div>
         <div class="user">
         <p><strong>Don't have an account?</strong>  <a href="/sign_up" class="btn btn-primary">Sign Up</a></p>
         <p><strong>Already an user?</strong>  <a href="/sign_in" class="btn btn-primary">Login</a></p>
@@ -19,6 +17,7 @@ body, html {
 }
 p {
     font-size: 20px;
+    margin: 5px;
 }
 #mobile {
     /* Full height */
@@ -36,22 +35,26 @@ p {
 img {
     width:10em;
     height:10em;
-}
-#mobile #header-txt {   
-    height: 200px;
-    width: 360px;
-    font-family: 'Rye';font-size: 43px;
-    position: absolute;
-    text-align: center;
-    bottom: 120px;
+    position:absolute;
+    top: 50%;
     margin: 0 auto;
+    margin-top: -270px; /* Half the height */
+    margin-left: -80px; /* Half the width */
+    left: 50%;
+}
+#mobile h3 {   
+    height: 100px;
+    min-width: 350px;
+    font-family: 'Rye';font-size: 43px;
+    text-align:center;
+    margin:0 auto;
 }
 #mobile .user {
     position: absolute;
     text-align: center;
-    bottom: 120px;
+    bottom: 130px;
     margin: 0 auto;
 
-    width: 400px;
+    min-width: 350px;
 }
 </style>
