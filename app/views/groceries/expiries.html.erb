@@ -15,9 +15,7 @@
             <div>
               <td><%= exp.ingredient %></td> 
               <td><%= exp.expiry_countdown %></td>
-              <td><%= link_to '<i class="icon-ok icon-white"></i>	&#10008;'.html_safe, user_grocery_path(exp.user, exp), method: :delete %></td>
-
-              <td><%= link_to "Remove", user_grocery_path(exp.user, exp), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <td><%= link_to '<i class="icon-ok icon-white"></i>	&#10008;'.html_safe, user_grocery_path(exp.user, exp), method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </div>
           </tr>
         <% end %>
