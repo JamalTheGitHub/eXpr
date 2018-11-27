@@ -1,23 +1,22 @@
-<body>
-<div class="mobile" >
-    <h1>E-Fridge</h1>
-    <p> Lorem aodkz qoen odkf aldof zncvqiw zlco qowen lz sdf</p>
-    <hr class="style13">
-    <a href="/sign_in" class="btn btn-primary">Login</a>
-    <a href="/sign_up" class="btn btn-primary">Sign Up</a>
-</div>
+<link href='https://fonts.googleapis.com/css?family=Rye' rel='stylesheet'><body>
+    <div id="mobile">
+      <div class="container">    
+        <h1>eXpr</h1>
+      </div>
+    <h4> Lorem aodkz qoen odkf aldof zncvqiw zlco qowen lz sdf</h4>
+        <div class="user">
+        <p><strong>Don't have an account?</strong>  <a href="/sign_up" class="btn btn-primary">Sign Up</a></p>
+        <p><strong>Already an user?</strong>  <a href="/sign_in" class="btn btn-primary">Login</a></p>
+        </div>
+    </div>
 </body>
 <style>
 body, html {
-    height: 100%
+    height: 100%;
+
 }
-hr.style13 {
-	height: 10px;
-	border: 0;
-	box-shadow: 0 10px 10px -10px #8c8b8b inset;
-}
-h1 {
-    text-align: center; 
+p {
+    font-size: 20px;
 }
 #mobile {
         /* Full height */
@@ -28,7 +27,34 @@ h1 {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url(asset_path("mobilebackground.jpg"));
+    background-image: url(<%= asset_path("mobilebackground.jpg")%>);
+    position:relative;
 }
+.container {
+    position:relative;
+    text-align: center;
+    top:15%;
+}
+#mobile h1 {
+    height: 50px;
+    position: absolute;
+    right: 30%;
 
+    font-family: 'Rye';font-size: 70px;}
+#mobile h4 {   
+    height: 200px;
+    width: 360px;
+    text-align: center;
+    position: absolute;
+    bottom: 200px;
+    left: 3vh;
+}
+#mobile .user {
+    position: absolute;
+    text-align: center;
+    bottom: 120px;
+    margin: 0 auto;
+
+    width: 400px;
+}
 </style>

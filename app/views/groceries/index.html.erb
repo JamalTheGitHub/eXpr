@@ -24,9 +24,10 @@
           <th>Actions</th>
           </tr>
       </thead>
+
       <tbody id='original-index'>
-        <% @groceries.each_with_index do |grocery,i| %>
-          <tr>
+        <% current_user.groceries.each_with_index do |grocery,i| %>
+            <tr data-toggle="collapse" data-target="#entry-<%=i%>" aria-expanded="false" aria-controls="collapseExample">
               <% if grocery.expired?%>
                 <td style="color:red"><%=grocery.ingredient%></td>
                 <td style="text-align:center; color:red"><%=grocery.expired_date%></td>
