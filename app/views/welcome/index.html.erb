@@ -11,9 +11,9 @@
 <div class="card">
   <div class="box">
   <h1 style="font-size:8vw">Today</h1>
-  <p>All item total:</p>
-  <p>Expiring total:</p>
-  <p>Expired total:</p>
+  <p>All item total:<%= " #{@groceries.count}" %></p>
+  <p>Expiring total:<%= " #{@exps.count}" %></p>
+  <p>Expired total: <%= " #{@expired.count}" %></p>
   </div>
 </div>
   <div class="card">

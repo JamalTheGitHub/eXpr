@@ -4,7 +4,7 @@ class GroceriesController < ApplicationController
   def index
     recipe_key = ENV["FOOD2FORK"]
 
-    @groceries = Grocery.all.order(:expired_date)
+    @groceries = User.find(params[:user_id]).groceries.order(:expired_date)
   end
 
   def new
