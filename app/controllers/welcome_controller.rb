@@ -6,7 +6,7 @@ class WelcomeController < ApplicationController
             @exps = []
             @expired = []
             @groceries.each do |grocery|
-                if grocery.expiring_within_3days?
+                if grocery.expiring_within(3)
                     @exps << grocery
                 end    
             end

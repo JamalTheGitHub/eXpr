@@ -1,9 +1,9 @@
-<link href='https://fonts.googleapis.com/css?family=Rye' rel='stylesheet'><body>
+<link href='https://fonts.googleapis.com/css?family=Rye' rel='stylesheet'>
     <div id="mobile">
-      <div class="container">    
-        <h1>eXpr</h1>
-      </div>
-    <h4> Lorem aodkz qoen odkf aldof zncvqiw zlco qowen lz sdf</h4>
+        <div id="logo">
+        <%= image_tag( asset_path ('expr-logo-1309x1309.png'))%>
+        </div>
+        <h3> Food wasting made hard!</h3>
         <div class="user">
         <p><strong>Don't have an account?</strong>  <a href="/sign_up" class="btn btn-primary">Sign Up</a></p>
         <p><strong>Already an user?</strong>  <a href="/sign_in" class="btn btn-primary">Login</a></p>
@@ -35,19 +35,21 @@ p {
     text-align: center;
     top:15%;
 }
-#mobile h1 {
-    height: 50px;
+img {
     position: absolute;
-    right: 30%;
-
-    font-family: 'Rye';font-size: 70px;}
-#mobile h4 {   
+    width:140px;
+    height:140px;
+    top: 12vh;
+    right: 33%;
+}
+#mobile h3 {   
     height: 200px;
     width: 360px;
     text-align: center;
     position: absolute;
-    bottom: 200px;
+    bottom: 220px;
     left: 3vh;
+    font-family: 'Rye';font-size: 43px;
 }
 #mobile .user {
     position: absolute;

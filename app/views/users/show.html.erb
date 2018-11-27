@@ -3,12 +3,12 @@
         <div class="box">
             <div class="img">
                 <%= image_tag(@user.avatar? ? @user.avatar.url : asset_path("profilepic.png"), alt: 'Image') %>
-            </div>
-            <h2><%=@user.last_name%> <%=@user.first_name%><br></h2>
+            </div><br/>
+            <h2> <%=@user.first_name%> <%=@user.last_name%><br></h2>
             <div class= "text">
             <p>Email: <%=@user.email%> </p>
             <p>First name: <%=@user.first_name%> </p>
-            <p>Second name: <%=@user.last_name%> </p>
+            <p>Last name: <%=@user.last_name%> </p>
             <p>Country: <%=@user.country%> <p>
             </div>
                 <%= link_to 'Edit profile', edit_user_path(@user), class:"btn btn-primary" %>
