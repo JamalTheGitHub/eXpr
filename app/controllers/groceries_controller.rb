@@ -116,8 +116,15 @@ class GroceriesController < ApplicationController
   def recipes
     
     ingredients = recipe_params.join(',')
-    @recipes = Food2Fork::Recipe.search({q: ingredients, sort: 'r', page: 3})
-    
+    @recipes = Food2Fork::Recipe.search({q: ingredients, sort: 'r', page: 1})
+    @recipes.each do |r|
+      url_http = r.image_url
+      uri = URI.parse(url_http)
+      uri.scheme = "https"
+      url_https = uri.to_s
+      r.image_url = url_https
+    end
+
     render 'result'
   end
 
