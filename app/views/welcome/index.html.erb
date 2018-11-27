@@ -1,3 +1,5 @@
+<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+
 <html>
 <body>
 <div class="card-deck">
@@ -10,8 +12,9 @@
 <div class="card">
   <div class="box">
   <h3 style="text-align: center;">Welcome, <%= @user %>!</h3>
-  <hr class="my-3">
-  <p style="text-align: center;"><%=Time.now.strftime("%A, ")%><%=Date.today.to_formatted_s(:rfc822)%></p>
+  <hr class="mt-3 mb-2">
+  <p style="text-align: center;" id='date-p'><%=Time.now.strftime("%A, ")%><%=Date.today.to_formatted_s(:rfc822)%></p>
+  <hr class="mt-0 mb-2">
   <p>Total Items:<%= " #{@groceries.count}" %></p>
   <p>Expiring Items:<%= " #{@exps.count}" %></p>
   <p>Expired Items: <%= " #{@expired.count}" %></p>
@@ -32,12 +35,10 @@
 
 <style>
 
-p {
-  font-size: 20px;
-}
-h4 {
-  font-family: "Comic Sans MS", sans-serif;
+
+h4, h3 {
   text-align: center;
+  font-family: 'Quicksand', sans-serif;
 }
 .button {
   margin-bottom:10px;
@@ -63,6 +64,13 @@ h5 {
   margin: 2px;
   color: white;
 }
+
+#date-p {
+    font-family: 'Quicksand', sans-serif;
+    font-style: italic;
+    font-size: 1em;
+}
+
 #black {
   color:black;
 }

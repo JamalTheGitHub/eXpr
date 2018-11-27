@@ -18,6 +18,12 @@
 <!-- Load an icon library -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<%# Load default font %>
+<link href="https://fonts.googleapis.com/css?family=Niramit" rel="stylesheet">
+
+
+
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-tract':'reload' %>  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tag %>
@@ -64,6 +70,15 @@
       <div id="flash_<%= key %>"><%=h value %></div>
     <% end %>
   </div>
+
+<%# Load this font first before overiding those specified in individual views %>
+  <style>
+    body {
+      font-family: 'Niramit', sans-serif;
+    }
+  </style>
+
+
   <%= yield %>
 </body>
 
