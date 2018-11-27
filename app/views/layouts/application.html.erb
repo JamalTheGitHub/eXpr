@@ -18,11 +18,9 @@
 <!-- Load an icon library -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
 <%# Load default font %>
 <link href="https://fonts.googleapis.com/css?family=Niramit" rel="stylesheet">
-
-
-
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-tract':'reload' %>  <%= javascript_include_tag 'application' %>
@@ -31,14 +29,14 @@
 <meta name="apple-mobile-web-app-capable" content="yes"></head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-  
-  <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon btn-sm"></span>
-  </button>
-  <a class="navbar-brand" href="/">eXpr.</a>
-  
-  <i class="fa fa-microphone fa-lg" id='global-search-btn' ></i>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" id='navi-bar'>
+    
+    <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon btn-sm"></span>
+    </button>
+    <a class="navbar-brand" href="/">eXpr.</a>
+    
+    <i class="fa fa-microphone fa-lg" id='global-search-btn' ></i>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
@@ -64,14 +62,15 @@
   </div>
 </nav>
 
-
   <div id="flash">
     <% flash.each do |key, value| -%>
       <div id="flash_<%= key %>"><%=h value %></div>
     <% end %>
   </div>
 
+
 <%# Load this font first before overiding those specified in individual views %>
+
   <style>
     body {
       font-family: 'Niramit', sans-serif;
@@ -84,13 +83,15 @@
 
 <style>
 body {
-  background-color: lavenderblush;
+  background-color: rgba(222,220,222,1);
 }
 #global-search-btn {
-  <%# font-size: 20px; %>
   color: white;
 }
 
+#navi-bar {
+        box-shadow: 0 0 1em 0.2em rgba(70,70,70,0.5);
+}
 
 </style>
 </html>
