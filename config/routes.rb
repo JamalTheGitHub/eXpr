@@ -25,8 +25,11 @@ Rails.application.routes.draw do
 
   root "welcome#index"
   
+  # CUSTOM ROUTES 
   post '/voice', to: 'groceries#voice_analyse'
   post '/ocr', to: 'groceries#ocr_analyse'
   post '/search', to: 'search#identify'
+  post '/push', to: 'groceries#push'
+
 
 end

@@ -19,7 +19,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tag %>
-</head>
+<link rel="manifest" href="/manifest.json" />
+<meta name="apple-mobile-web-app-capable" content="yes"></head>
 <body>
 
 <div class="topnav" id="myTopnav">  
@@ -28,7 +29,8 @@
     </div>
     
     <% if signed_in? -%>  
-      <a href="/users/:id/groceries ">My Grocery</a>
+      <%= link_to "Profile", user_path(current_user)%>
+      <a href="/users/<%=current_user.id%>/groceries ">My Grocery</a>
       <%= link_to "Profile", user_path(current_user)%>
       <a href="/sign_out" data-method="delete">Logout</a>
     <% else -%>
@@ -128,10 +130,11 @@
 
 <script>
 
+var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
+domain_name = window.location.protocol + "//" + window.location.host + "/";
 
 $('#global-search-btn').click(function(){
   event.preventDefault();
-  var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 
   var recognition = new SpeechRecognition();
   recognition.lang = 'en-US';
@@ -152,7 +155,7 @@ $('#global-search-btn').click(function(){
   
     fetch('/search', {
       method: 'post',
-      body: JSON.stringify({text: {value: voice_result}}),
+      body: JSON.stringify({text: {value: voice_result, domain: domain_name}}),
       headers: {
         'Content-Type': 'application/json',
         'X-CSRF-Token': Rails.csrfToken()

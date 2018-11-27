@@ -80,3 +80,9 @@ gem 'ocr_space'
 # AWS gem
 gem 'carrierwave-aws'
 gem 'aws-sdk-rails'
+
+# Serviceworker Rails
+gem 'serviceworker-rails'
+
+# Webpush to generate VAPID keys for push notif
+gem 'webpush'

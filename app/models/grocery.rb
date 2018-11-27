@@ -11,9 +11,9 @@ class Grocery < ApplicationRecord
     end
   end
 
-  def expiring_within_3days?
+  def expiring_within(days)
     time_count = (self.expired_date - Date.today).to_i
-    if (time_count < 3 && time_count > 0) || time_count == 3
+    if (time_count < days && time_count > 0) || time_count == days
       return true
     elsif time_count < 0
       return false
@@ -22,7 +22,12 @@ class Grocery < ApplicationRecord
     end
   end
 
-  def show_expiring_within_3days
-    
+  def show_valid_items?
+    time_count = (self.expired_date - Date.today).to_i
+    if time_count > 0
+      return true
+    else
+      return false
+    end
   end
 end
