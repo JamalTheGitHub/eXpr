@@ -6,20 +6,17 @@
         <tr>
           <th>Item</th>
           <th>Days Left</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
         <% @exps.each do |exp,i| %>
-          <tr data-toggle="collapse" data-target="#entry-<%=i%>" aria-expanded="false" aria-controls="collapseExample">
+          <tr>
             <div>
               <td><%= exp.ingredient %></td> 
               <td><%= exp.expiry_countdown %></td>
+              <td><%= link_to '<i class="icon-ok icon-white"></i>	&#10008;'.html_safe, user_grocery_path(exp.user, exp), method: :delete %></td>
             </div>
-          </tr>
-          <tr class="collapse" id="entry-<%=i%>">
-            <div>
-              <td><%= link_to "Remove", user_grocery_path(exp.user, exp), method: :delete %></td>
-            <div>
           </tr>
         <% end %>
       </tbody>

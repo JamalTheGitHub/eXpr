@@ -24,8 +24,9 @@
 
 <div class="topnav" id="myTopnav">  
     <div class="brand">
-      <a class="navbar-brand" href="/">E-Fridge</a>
+      <a class="navbar-brand" id="brand" href="/">eXpr</a>
     </div>
+    
     <% if signed_in? -%>  
       <a href="/users/:id/groceries ">My Grocery</a>
       <%= link_to "Profile", user_path(current_user)%>
@@ -38,7 +39,7 @@
     <i class="fa fa-bars"></i>
   </a>
   <div class="search">
-    <i class="fa fa-fw fa-search" id='global-search-btn'></i>
+    <i class="fa fa-microphone" id='global-search-btn'></i>
   </div>
 </div>
 
@@ -52,15 +53,18 @@
 </body>
 
 <style>
+#global-search-btn {
+  font-size: 20px;
+}
 .search {
   color: white;
   float: right;
-  margin: 15px;
+  margin: 17px 20px 0 0;
 }
 .brand {
     position: absolute;
     left: 50%;
-    margin-left: -50px !important;  /* 50% of your logo width */
+    margin-left: -30px !important;  /* 50% of your logo width */
     display: block;
 }
 /* Add a black background color to the top navigation */
@@ -175,11 +179,25 @@ $('#global-search-btn').click(function(){
 
 /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
 function myFunction() {
+    var y = document.getElementById("brand");
     var x = document.getElementById("myTopnav");
+    var z = document.getElementById("global-search-btn")
     if (x.className === "topnav") {
         x.className += " responsive";
     } else {
         x.className = "topnav";
+    }
+
+    if (y.style.display === "none") {
+        y.style.display = "block";
+    } else {
+        y.style.display = "none";
+    }
+
+     if (z.style.display === "none") {
+        z.style.display = "block";
+    } else {
+        z.style.display = "none";
     }
 }
 </script>
