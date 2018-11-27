@@ -10,10 +10,11 @@
 
 <div class="card">
   <div class="box">
-  <h1 style="font-size:8vw">Today</h1>
-  <p>All item total:<%= " #{@groceries.count}" %></p>
-  <p>Expiring total:<%= " #{@exps.count}" %></p>
-  <p>Expired total: <%= " #{@expired.count}" %></p>
+  <p>Total Items:<%= " #{@groceries.count}" %></p>
+  <p>Expiring Items:<%= " #{@exps.count}" %></p>
+  <p>Expired Items: <%= " #{@expired.count}" %></p>
+  <br/>
+  <h4>Welcome, <%=@user%>. What would you like to do?</h4>
   </div>
 </div>
   <div class="card">
@@ -29,8 +30,13 @@
 
 
 <style>
-h1 {
-  font-family: "Comic Sans MS", cursive, sans-serif;
+
+p {
+  text-align: center;
+  font-size: 20px;
+}
+h4 {
+  font-family: "Comic Sans MS", sans-serif;
   text-align: center;
 }
 .button {
