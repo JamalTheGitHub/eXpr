@@ -35,8 +35,10 @@
       <span class="navbar-toggler-icon btn-sm"></span>
     </button>
     <a class="navbar-brand" href="/">eXpr.</a>
-    
-    <i class="fa fa-microphone fa-lg" id='global-search-btn' ></i>
+    <% if signed_in? %>
+      <i class="fa fa-microphone fa-lg" id='global-search-btn' ></i>
+    <% end %> 
+
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
