@@ -18,8 +18,12 @@
           </tr>
       </thead>
       <tbody>
+
+        <% current_user.groceries.each_with_index do |grocery,i| %>
+          <tr>
         <% @groceries.each_with_index do |grocery,i| %>
           <tr data-toggle="collapse" data-target="#entry-<%=i%>" aria-expanded="false" aria-controls="collapseExample">
+
             <div>
               <% if grocery.expired?%>
                 <td style="color:red"><%=grocery.ingredient%></td>
@@ -30,10 +34,6 @@
               <% end %>
               <td style="text-align:center"><%= link_to '<i class="icon-ok icon-white"></i>	&#9998;'.html_safe, edit_user_grocery_path(grocery.user, grocery) %>
               &nbsp&nbsp&nbsp<%= link_to '<i class="icon-ok icon-white"></i>	&#10008;'.html_safe, user_grocery_path(grocery.user, grocery), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            </div>
-          </tr>
-          <tr class="collapse" id="entry-<%=i%>">
-            <div>
             </div>
           </tr>
         <% end %>
