@@ -2,6 +2,7 @@ class WelcomeController < ApplicationController
     def index
 
         if signed_in?
+            @user = current_user.first_name
             @groceries = User.find(current_user.id).groceries
             @exps = []
             @expired = []
