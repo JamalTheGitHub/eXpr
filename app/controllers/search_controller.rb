@@ -52,32 +52,32 @@ class SearchController < ApplicationController
         show_expiring_in = /Show\s(All\s)?Expiring\sIn\s(\d{1,2})\sDay(s)?/
         create_recipe = /(Show|Make|Create)\s(New|Recipe|Recipes)\s?(Recipe|Recipes)?/
         months = Date::MONTHNAMES.compact
-        add_item_date = /Add\s((\w+\s?)+\s)(Expiring\s)(\d{1,2}(st|nd|rd|th)?(\s?(Of)?)\s(#{months.join('|')})(\s\d{4})?)/
-        add_item_date_tmr = /Add\s((\w+\s?)+\s)(Expiring\sTomorrow)/
-        add_item_date_days = /Add\s((\w+\s?)+\s)(Expiring\sIn\s(\d{1,2})\sDays)/
+        add_item_date = /(Add|At)\s((\w+\s?)+\s)(Expiring\s)(\d{1,2}(st|nd|rd|th)?(\s?(Of)?)\s(#{months.join('|')})(\s\d{4})?)/
+        add_item_date_tmr = /(Add|At)\s((\w+\s?)+\s)(Expiring\sTomorrow)/
+        add_item_date_days = /(Add|At)\s((\w+\s?)+\s)(Expiring\sIn\s(\d{1,2})\sDays)/
 
-        if text.match?(/Add/)
+        if text.match?(/Add|At/)    
             if text.match?(add_item_date)
                 date_item_result = text.match(add_item_date)
-                item = date_item_result[1].strip
+                item = date_item_result[2].strip
 
                 if date_item_result[4].match?(' Of')
-                    date_result = date_item_result[4].gsub(' Of','')
+                    date_result = date_item_result[5].gsub(' Of','')
                 else
-                    date_result = date_item_result[4]
+                    date_result = date_item_result[5]
                 end
 
                 date = Date.parse(date_result).to_s
                 route = domain_name + "users/#{current_user_id}/groceries/new?item=#{item}&expiry_date=#{date}"
             elsif text.match?(add_item_date_tmr)
                 date_item_result = text.match(add_item_date_tmr)
-                item = date_item_result[1].strip
+                item = date_item_result[2].strip
                 date = Date.tomorrow.to_s
                 route = domain_name + "users/#{current_user_id}/groceries/new?item=#{item}&expiry_date=#{date}"    
             elsif text.match?(add_item_date_days)
                 date_item_result = text.match(add_item_date_days)
-                item = date_item_result[1].strip
-                date = (Date.today + date_item_result[4].to_i).to_s
+                item = date_item_result[2].strip
+                date = (Date.today + date_item_result[5].to_i).to_s
                 route = domain_name + "users/#{current_user_id}/groceries/new?item=#{item}&expiry_date=#{date}"             
             else
                 text
