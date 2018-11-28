@@ -2,6 +2,8 @@
 
 <html>
 <body>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
 <div class="card-deck">
 
   <% if signed_in? %>
@@ -11,13 +13,13 @@
   <% end %>
 <div class="card">
   <div class="box">
-  <h3 style="text-align: center;">Welcome, <%= @user %>!</h3>
-  <hr class="mt-3 mb-2">
-  <p style="text-align: center;" id='date-p'><%=Time.now.strftime("%A, ")%><%=Date.today.to_formatted_s(:rfc822)%></p>
-  <hr class="mt-0 mb-2">
-  <p>Total Items:<%= " #{@groceries.count}" %></p>
-  <p>Expiring Items:<%= " #{@exps.count}" %></p>
-  <p>Expired Items: <%= " #{@expired.count}" %></p>
+      <h3 style="text-align: center;">Welcome, <%= @user %>!</h3>
+    <hr class="mt-3 mb-2">
+      <p style="text-align: center;" id='date-p'><%=Time.now.strftime("%A, ")%><%=Date.today.to_formatted_s(:rfc822)%></p>
+    <hr class="mt-0 mb-2">
+      <p><i class="fas fa-cookie" style="font-size:22px"></i>   Total Items:<%= " #{@groceries.count}" %></p>
+      <p><i class="fas fa-cookie-bite" style="font-size:22px"></i>   Expiring Items:<%= " #{@exps.count}" %></p>
+      <p><i class="fas fa-skull-crossbones" style="font-size:22px"></i>   Expired Items: <%= " #{@expired.count}" %></p>
   </div>
 </div>
   <div class="card">
