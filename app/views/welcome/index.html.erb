@@ -1,3 +1,5 @@
+<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+
 <html>
 <body>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
@@ -9,20 +11,23 @@
   <%= button_to "Add new item?", new_user_grocery_path(current_user), method: :get,class:"btn btn-outline-primary btn-lg col-12 text-center" %>
   </div>
   <% end %>
-
 <div class="card">
   <div class="box">
-  <h1 style="font-size:8vw">Today</h1>
-  <p><i class="fas fa-cookie" style="font-size:22px"></i>   All item total:<%= " #{@groceries.count}" %></p>
-  <p><i class="fas fa-cookie-bite" style="font-size:22px"></i>   Expiring total:<%= " #{@exps.count}" %></p>
-  <p><i class="fas fa-skull-crossbones" style="font-size:22px"></i>   Expired total: <%= " #{@expired.count}" %></p>
+      <h3 style="text-align: center;">Welcome, <%= @user %>!</h3>
+    <hr class="mt-3 mb-2">
+      <p style="text-align: center;" id='date-p'><%=Time.now.strftime("%A, ")%><%=Date.today.to_formatted_s(:rfc822)%></p>
+    <hr class="mt-0 mb-2">
+      <p><i class="fas fa-cookie" style="font-size:22px"></i>   Total Items:<%= " #{@groceries.count}" %></p>
+      <p><i class="fas fa-cookie-bite" style="font-size:22px"></i>   Expiring Items:<%= " #{@exps.count}" %></p>
+      <p><i class="fas fa-skull-crossbones" style="font-size:22px"></i>   Expired Items: <%= " #{@expired.count}" %></p>
   </div>
 </div>
   <div class="card">
     <div class="box">
-    <div class="button"><%= button_to "All Items", user_groceries_path(current_user), type:"button", class:"btn btn-primary btn-block", method: :get %></div>
-    <div class="button"><%= button_to "Expiring", user_expiries_path(current_user), type:"button", class:"btn btn-warning btn-block", method: :get %></div>
-    <div id="button1"><%= button_to "Expired", user_expired_path(current_user), type:"button", class:"btn btn-danger btn-block", method: :get %></div>
+      <h4>Check your items?</h4>
+      <div class="button"><%= button_to "All Items", user_groceries_path(current_user), type:"button", class:"btn btn-primary btn-block", method: :get %></div>
+      <div class="button"><%= button_to "Expiring", user_expiries_path(current_user), type:"button", class:"btn btn-warning btn-block", method: :get %></div>
+      <div id="button1"><%= button_to "Expired", user_expired_path(current_user), type:"button", class:"btn btn-danger btn-block", method: :get %></div>
     </div>
   </div>
 </div>
@@ -31,9 +36,11 @@
 
 
 <style>
-h1 {
-  font-family: "Comic Sans MS", cursive, sans-serif;
+
+
+h4, h3 {
   text-align: center;
+  font-family: 'Quicksand', sans-serif;
 }
 .button {
   margin-bottom:10px;
@@ -47,8 +54,8 @@ h1 {
     width:350px;
     min-height:5px;
     background:#fff;
-    box-shadow:0 20px 50px rgba(0,0,0,.1);
-    border-radius:10px;
+    box-shadow: 0.2em 0.2em 0.8em 0.1em rgba(83, 83, 83, 0.3);
+    border-radius:0.5em;
     transition:0.5s;
 }
 
@@ -59,6 +66,13 @@ h5 {
   margin: 2px;
   color: white;
 }
+
+#date-p {
+    font-family: 'Quicksand', sans-serif;
+    font-style: italic;
+    font-size: 1em;
+}
+
 #black {
   color:black;
 }

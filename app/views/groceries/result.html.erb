@@ -1,20 +1,19 @@
 <h3>Choose your food!</h3>
-  <div class="card-deck">
-    <% @recipes.each do |recipe| %>
-      <div class="card">
-        <div class="card-body">
-          <%= recipe.title%>
-          <img src="<%= recipe.image_url %>" width="100" height="100">
-          <p><a href="<%= recipe.source_url%>">Check Recipe Out!</a></p>
-        </div>  
-      </div>
-    <% end %>
-  </div>
+<div class="card-deck">
+  <% @recipes.each do |recipe| %>
+    <div class="card">
+      <div class="card-body">
+        <%= recipe.title%>
+        <img src="<%= recipe.image_url %>" width="100" height="100">
+        <p><a href="<%= recipe.source_url%>" target="_blank">Check Out This Recipe!</a></p>
+      </div>  
+    </div>
+  <% end %>
+</div>
 
 <style>
 h3 {
   text-align: center;
-  font-family: "Comic Sans MS", cursive, sans-serif;
   margin-top: 30px;
 
 }
@@ -26,8 +25,8 @@ h3 {
     max-width:351px;
     min-height:5px;
     background:#fff;
-    box-shadow:0 20px 50px rgba(0,0,0,.1);
-    border-radius:10px;
+    box-shadow: 0.2em 0.2em 0.8em 0.1em rgba(83, 83, 83, 0.3);
+    border-radius:0.5em;
     transition:0.5s;
 }
 .card-body {

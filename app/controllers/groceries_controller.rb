@@ -1,8 +1,6 @@
 class GroceriesController < ApplicationController
-  require 'ocr_space'
 
   def index
-    recipe_key = ENV["FOOD2FORK"]
 
     @groceries = User.find(params[:user_id]).groceries.order(:expired_date)
   end
@@ -96,13 +94,6 @@ class GroceriesController < ApplicationController
     redirect_to user_groceries_path
   end
   
-  def show
-    recipe_key = ENV["FOOD2FORK"]
-    
-    @groceries = Grocery.all
-    @grocery = Grocery.find(params[:id])
-  end
-  
   def show_ingredients
     @groceries = User.find(params[:user_id]).groceries.order(:expired_date)
     @valid_items = []
@@ -116,8 +107,15 @@ class GroceriesController < ApplicationController
   def recipes
     
     ingredients = recipe_params.join(',')
-    @recipes = Food2Fork::Recipe.search({q: ingredients, sort: 'r', page: 3})
-    
+    @recipes = Food2Fork::Recipe.search({q: ingredients, sort: 'r', page: 1})
+    @recipes.each do |r|
+      url_http = r.image_url
+      uri = URI.parse(url_http)
+      uri.scheme = "https"
+      url_https = uri.to_s
+      r.image_url = url_https
+    end
+
     render 'result'
   end
 
