@@ -26,11 +26,26 @@
 <div class="avatar-field">
   <%= form.label "Profile picture:" %>
   <%= form.file_field :avatar %>
-</div>
-</br>
+</div><br/>
 
 <style>
 select {
   width: 50%;
 }
 </style>
+
+<script>
+function validateForm() {
+    var x = document.getElementById("email").value;
+    var y = document.getElementById("pwd").value;
+    if (x == "") {
+        alert("Email must be filled out");
+        return false;
+    }
+
+    if (y == "") {
+        alert("Password must be filled out");
+        return false;
+    }
+}
+</script>
