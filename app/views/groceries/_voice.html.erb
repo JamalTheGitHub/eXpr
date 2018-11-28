@@ -1,7 +1,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div>
-<p><font class="fa fa-microphone" id="voice-record-button" style="font-size:32px"></font>   Voice Engine</p>
-    <div id='voice-output'></div>
+<div id="voice-record-button">
+  <p><font class="fa fa-microphone" id='voice-icon' style="font-size:32px"></font>   Voice Engine</p>
+      <div id='voice-output'></div>
+  </div>
+
 </div>
 <style>
 p {
@@ -25,7 +28,7 @@ const voice_output = document.querySelector('#voice-output')
 
 record_btn.onclick = function() {
  recognition.start();
- $(this).attr("color", "red");
+ $('#voice-icon').attr("color", "red");
  console.log('Ready to receive a command.');
 }
 

@@ -115,6 +115,7 @@ class GroceriesController < ApplicationController
       url_https = uri.to_s
       r.image_url = url_https
     end
+    @ingredients = recipe_params.join(', ')
 
     render 'result'
   end

@@ -1,4 +1,6 @@
-<h3>Choose your food!</h3>
+
+<h3>Trending Recipies!</h3>
+<p>Ingredient(s): <%=@ingredients%></p>
     <hr class="mt-3 mb-2">
 <div class="card-deck">
   <% @recipes.each do |recipe| %>
@@ -13,7 +15,7 @@
 </div>
 
 <style>
-h3 {
+h3, p {
   text-align: center;
   margin-top: 30px;
 

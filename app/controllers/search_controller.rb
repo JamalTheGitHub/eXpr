@@ -47,11 +47,12 @@ class SearchController < ApplicationController
         current_user_id = current_user.id
         
 
-        show_all = /Show\s(All\s)?(Groceries|Grocery)\s?(Groceries|Grocery)?/
+        show_all = /Show\s(All(\s)?)?(Groceries|Grocery)\s?(Groceries|Grocery)?/
         show_expired = /Show\s(All\s)?Expired\s?(Groceries|Grocery|Food)?/
+        show_expiring_in = /Show\s(All\s)?Expiring\sIn\s(\d{1,2})\sDay(s)?/
         create_recipe = /(Show|Make|Create)\s(New|Recipe|Recipes)\s?(Recipe|Recipes)?/
         months = Date::MONTHNAMES.compact
-        add_item_date = /Add\s((\w+\s?)+\s)(Expiring\s)(\d{1,2}(st|nd|rd|th)?(\s?(Of)?)\s(#{months.join('|')})\s\d{4})/
+        add_item_date = /Add\s((\w+\s?)+\s)(Expiring\s)(\d{1,2}(st|nd|rd|th)?(\s?(Of)?)\s(#{months.join('|')})(\s\d{4})?)/
         add_item_date_tmr = /Add\s((\w+\s?)+\s)(Expiring\sTomorrow)/
         add_item_date_days = /Add\s((\w+\s?)+\s)(Expiring\sIn\s(\d{1,2})\sDays)/
 
@@ -81,6 +82,9 @@ class SearchController < ApplicationController
                 route = domain_name + "users/#{current_user_id}/recipes" 
             elsif text.match?(show_expired)
                 route = domain_name + "users/#{current_user_id}/expired"
+            elsif text.match?(show_expiring_in)
+                days = text.match(show_expiring_in)[2].to_i
+                route = domain_name + "users/#{current_user_id}/expiries?days=#{days}"
             else
                 text
             end

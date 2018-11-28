@@ -8,7 +8,7 @@
 
   <% if signed_in? %>
   <div class="card">
-  <%= button_to "Add new item?", new_user_grocery_path(current_user), method: :get,class:"btn btn-outline-primary btn-lg col-12 text-center" %>
+  <%= button_to "Add new entry?", new_user_grocery_path(current_user), method: :get,class:"btn btn-outline-primary btn-lg col-12 text-center" %>
   </div>
   <% end %>
 <div class="card">
@@ -24,9 +24,9 @@
 </div>
   <div class="card">
     <div class="box">
-      <h4>Check your items?</h4>
-      <div class="button"><%= button_to "All Items", user_groceries_path(current_user), type:"button", class:"btn btn-primary btn-block", method: :get %></div>
-      <div class="button"><%= button_to "Expiring", user_expiries_path(current_user), type:"button", class:"btn btn-warning btn-block", method: :get %></div>
+      <h4>Check your groceries?</h4>
+      <div class="button"><%= button_to "All Groceries", user_groceries_path(current_user), type:"button", class:"btn btn-primary btn-block", method: :get %></div>
+      <div class="button"><%= button_to "Expiring Soon", user_expiries_path(current_user), type:"button", class:"btn btn-warning btn-block", method: :get %></div>
       <div id="button1"><%= button_to "Expired", user_expired_path(current_user), type:"button", class:"btn btn-danger btn-block", method: :get %></div>
     </div>
   </div>
