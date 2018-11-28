@@ -1,6 +1,18 @@
 <div class="card">
   <div class="box">
-    <h3>Item expiring</h3>
+    <% if @days %>
+    <h3>Expiring in <%=@days%> days</h3>
+    <% else %>
+    <h3>Expiring in 3 days</h3>
+    <% end %>
+
+    <div class="ui-widget form-inline mb-2 ">
+      <input id="exp-date-input" type="text" placeholder="Other dates.." class='form-control col-9 mr-2 mt-2 mb-2'>
+      <button id='exp-find' class='btn-sm btn-primary mr-2 mt-2 mb-2'>Go</button>
+    </div>
+
+
+
     <table class="table table-hover">
       <thead>
         <tr>
@@ -14,8 +26,8 @@
           <tr>
             <div>
               <td><%= exp.ingredient %></td> 
-              <td><%= exp.expiry_countdown %></td>
-              <td><%= link_to '<i class="icon-ok icon-white"></i>	&#10008;'.html_safe, user_grocery_path(exp.user, exp), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <td style='text-align:center;'><%= exp.expiry_countdown %></td>
+              <td style='text-align:center;'><%= link_to '<i class="icon-ok icon-white"></i>	&#10008;'.html_safe, user_grocery_path(exp.user, exp), method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </div>
           </tr>
         <% end %>
@@ -40,3 +52,13 @@
 }
 
 </style>
+
+<script>
+  $('#exp-find').click( function() {
+    const domain = window.location.origin
+    const day_expire = $('#exp-date-input').val()
+    console.log(domain + '/users/' + <%= current_user.id%> + '/expires?days=' + day_expire)
+    window.location.assign(domain + '/users/' + <%= current_user.id%> + '/expiries?days=' + day_expire)
+  });
+
+</script>

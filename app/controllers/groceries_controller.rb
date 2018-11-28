@@ -120,13 +120,27 @@ class GroceriesController < ApplicationController
   end
 
   def expiries
-    groceries = User.find(params[:user_id]).groceries.order(:expired_date)
-    @exps = []
-    groceries.each do |grocery|
-      if grocery.expiring_within(3) == true
-        @exps << grocery
+    if params[:days]
+      days_to_expiry = params[:days].to_i
+      @days = days_to_expiry
+
+      groceries = User.find(params[:user_id]).groceries.order(:expired_date)
+      @exps = []
+      groceries.each do |grocery|
+        if grocery.expiring_within(days_to_expiry) == true
+          @exps << grocery
+        end
+      end
+    else
+      groceries = User.find(params[:user_id]).groceries.order(:expired_date)
+      @exps = []
+      groceries.each do |grocery|
+        if grocery.expiring_within(3) == true
+          @exps << grocery
+        end
       end
     end
+
   end
 
   def expired
