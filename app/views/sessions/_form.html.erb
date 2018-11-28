@@ -9,12 +9,12 @@
   </div>
 
   <div>
-  <button type="submit" class="btn btn-primary mb-2">Sign in</button>
+  <button type="submit" class="btn btn-primary mb-3 mt-1">Sign in</button>
   </div>
 
   <div class="other-links">
     <% if Clearance.configuration.allow_sign_up? %>
-    <p>Don't have an account?                              <a href="/sign_up" class="btn btn-outline-primary" >Sign Up</a></p>
+    <p>Don't have an account?                              <a href="/sign_up" class="btn btn-outline-primary btn-sm" >Sign Up</a></p>
     <% end %>
     <%= link_to t(".forgot_password"), new_password_path %>
   </div>

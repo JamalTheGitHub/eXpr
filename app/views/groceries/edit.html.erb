@@ -1,7 +1,8 @@
 <div class="card-deck">
   <div class="card">
     <div class="box">
-    <h2>Edit item</h2>    
+    <h2>Edit item</h2>  
+        <hr class="mt-3 mb-2">  
       <%= form_with scope: :grocery, url: user_groceries_path, local: true, :html => {class:'form-group'} do |form| %>
         <p>
           <label for="ingrdient">Item:</label>

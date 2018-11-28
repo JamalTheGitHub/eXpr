@@ -1,7 +1,9 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
 <div class="card">
   <div class="box">
     <h3>Expired Groceries</h3>
-    <table class="table table-hover">
+    <table class="table table-hover mt-3">
       <thead>
         <tr>
           <th>Item</th>
@@ -13,9 +15,10 @@
         <% @expired.each do |exprd,i| %>
           <tr>
             <div>
+
               <td style='color:red;'><%= exprd.ingredient %></td> 
               <td style='text-align:center;color:red;'><%= -exprd.expiry_countdown %></td>
-              <td style='text-align:center;'><%= link_to '<i class="icon-ok icon-white"></i>	&#10008;'.html_safe, user_grocery_path(exprd.user, exprd), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <td style='text-align:center;'><%= link_to '<i class="far fa-trash-alt"></i>'.html_safe, user_grocery_path(exprd.user, exprd), method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </div>
         <% end %>
       </tbody>
