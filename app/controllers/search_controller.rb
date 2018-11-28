@@ -60,7 +60,14 @@ class SearchController < ApplicationController
             if text.match?(add_item_date)
                 date_item_result = text.match(add_item_date)
                 item = date_item_result[1].strip
-                date = Date.parse(date_item_result[4]).to_s
+
+                if date_item_result[4].match?(' Of')
+                    date_result = date_item_result[4].gsub(' Of','')
+                else
+                    date_result = date_item_result[4]
+                end
+
+                date = Date.parse(date_result).to_s
                 route = domain_name + "users/#{current_user_id}/groceries/new?item=#{item}&expiry_date=#{date}"
             elsif text.match?(add_item_date_tmr)
                 date_item_result = text.match(add_item_date_tmr)

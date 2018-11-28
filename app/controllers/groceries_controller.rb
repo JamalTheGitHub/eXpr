@@ -261,17 +261,26 @@ class GroceriesController < ApplicationController
     item_tmr = /(Expiring\s)?Tomorrow/
     item_days = /(Expiring\sIn\s)?(\d{1,2})\sDays/
     
-
     # Capitalises all first character of words only
     text = parsed_text.titleize
 
     if text.match?(date_only)
       result = text.match(date_only)[0]
-      expiry_date = Date.parse(result).to_s
+      if result.match?(' Of')
+        date = result.gsub(' Of','')
+      else
+        date = result
+      end
+      expiry_date = Date.parse(date).to_s
     elsif text.match?(item_date)
       result = text.match(item_date)[0]
+      if result.match?(' Of')
+        date = result.gsub(' Of','')
+      else
+        date = result
+      end
       item_name = text.chomp(result).strip
-      expiry_date = Date.parse(result).to_s
+      expiry_date = Date.parse(date).to_s
     elsif text.match?(item_tmr)
       result = text.match(item_tmr)[0]
       item_name = text.chomp(result).strip
