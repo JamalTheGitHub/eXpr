@@ -16,7 +16,6 @@
           <tr>
             <div>
               <td><%= exprd.ingredient %></td> 
-
               <td><%= -exprd.expiry_countdown %></td>
               <td><%= link_to '<i class="far fa-trash-alt"></i>'.html_safe, user_grocery_path(exprd.user, exprd), method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </div>
