@@ -61,4 +61,20 @@
     window.location.assign(domain + '/users/' + <%= current_user.id%> + '/expiries?days=' + day_expire)
   });
 
+
+  $('#exp-date-input').bind("enterKey",function(e){
+    const domain = window.location.origin
+    const day_expire = $('#exp-date-input').val()
+    console.log(domain + '/users/' + <%= current_user.id%> + '/expires?days=' + day_expire)
+    window.location.assign(domain + '/users/' + <%= current_user.id%> + '/expiries?days=' + day_expire)    
+  });
+
+  // Event when enter is pressed in exp date input form
+  $('#exp-date-input').keyup(function(e){
+      if(e.keyCode == 13)
+      {
+          $(this).trigger("enterKey");
+      }
+  });
+
 </script>
