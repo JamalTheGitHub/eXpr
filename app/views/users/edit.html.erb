@@ -1,6 +1,7 @@
 <div class="card">
   <div class="box">
     <h2>Update User</h2>
+        <hr class="mt-3 mb-2">
     <%= form_for @user, :html => {class:'form-group', onsubmit: 'return validateForm()'} do |form| %>
     <%= render partial: '/users/form', object: form %>
     <%= form.submit 'Save changes', :class => 'btn btn-primary' %>   
