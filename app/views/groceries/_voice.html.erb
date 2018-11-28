@@ -33,7 +33,7 @@ record_btn.onclick = function() {
 }
 
 recognition.onresult = function(event) {
- $("#voice-record-button").attr("color", "black");
+ $("#voice-icon").attr("color", "black");
  var last = event.results.length - 1;
  var first_result = event.results[last][0].transcript;
  var confidence = event.results[0][0].confidence
