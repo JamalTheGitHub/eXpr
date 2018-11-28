@@ -1,7 +1,7 @@
 <div class="card">
   <div class="box">
     <%= form_with scope: :grocery, url: user_recipes_path(current_user), method: :post, local: true do |form| %>
-      <h5>Check the ingredients for possible recipes!</h5>
+      <h5>Make a recipe with:</h5>
       <% @valid_items.each do |valid_item| %>
         <tr>
           <td><% check_box_tag "ingredients[]", valid_item.ingredient %></td>

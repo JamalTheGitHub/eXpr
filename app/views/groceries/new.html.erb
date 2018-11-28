@@ -2,10 +2,10 @@
   
 <div class="card">
   <div class="box">
-  <h2>New item</h2>    
+  <h2>New Grocery</h2>    
     <%= form_with scope: :grocery, url: user_groceries_path, local: true, :html => {class:'form-group'} do |form| %>
       <p>
-        <label for="ingrdient">Item:</label>
+        <label for="ingrdient">Grocery:</label>
         <% if @voice_preset_new %>
           <%= form.text_field :ingredient, id:'ingredient', class: "form-control", value: @voice_preset_new[:item] %><br/>
         <% else %>

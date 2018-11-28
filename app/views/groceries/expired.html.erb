@@ -13,8 +13,8 @@
         <% @expired.each do |exprd,i| %>
           <tr>
             <div>
-              <td><%= exprd.ingredient %></td> 
-              <td style='text-align:center;'><%= exprd.expiry_countdown %></td>
+              <td style='color:red;'><%= exprd.ingredient %></td> 
+              <td style='text-align:center;color:red;'><%= -exprd.expiry_countdown %></td>
               <td style='text-align:center;'><%= link_to '<i class="icon-ok icon-white"></i>	&#10008;'.html_safe, user_grocery_path(exprd.user, exprd), method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </div>
         <% end %>
