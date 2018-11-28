@@ -28,9 +28,8 @@
           <tr>
             <div>
               <td><%= exp.ingredient %></td> 
-              <td><%= exp.expiry_countdown %></td>
-              <td><%= link_to '<i class="far fa-trash-alt"></i>'.html_safe, user_grocery_path(exp.user, exp), method: :delete, data: { confirm: 'Are you sure?' } %></td>
               <td style='text-align:center;'><%= exp.expiry_countdown %></td>
+              <td><%= link_to '<i class="far fa-trash-alt"></i>'.html_safe, user_grocery_path(exp.user, exp), method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </div>
           </tr>
         <% end %>
